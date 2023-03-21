@@ -8,8 +8,8 @@ from fastapi import FastAPI
 from loguru import logger
 from pydantic import BaseModel
 
-from .baseline import popular_items
-from .utils import read_data
+from baseline import popular_items
+from utils import read_data
 
 app = FastAPI(
     title='Popular Items',
