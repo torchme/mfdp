@@ -25,6 +25,15 @@ numpy = "^1.24.2"
 fastapi = "^0.95.0"
 uvicorn = "^0.21.1"
 loguru = "^0.6.0"
+regex = "^2023.3.23"
+sklearn = "^0.0.post2"
+scikit-learn = "^1.2.2"
+lightfm = "^1.17"
+more-itertools = "^9.1.0"
+tqdm = "^4.65.0"
+implicit = "^0.6.2"
+wandb = "^0.15.2"
+streamlit = "^1.22.0"
 
 [tool.poetry.dev-dependencies]
 
