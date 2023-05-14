@@ -68,6 +68,8 @@ _Этот проект создан и поддерживается команд
 ## <img src="https://github.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/blob/master/Emojis/Activities/Framed%20Picture.png?raw=true" height="32"/> Систем Дизайн
 * **[Miro](https://miro.com/app/board/uXjVMYFj-Ro=/?share_link_id=287605501439)**
 
+![](pictures/mldesign.png)
+
 Для создания системы рекомендательной системы для библиотек можно использовать следующий подход:
 
 **Backend MVP:** создать минимальный backend с возможностью __cold start__, который позволит получить первые результаты рекомендаций.
