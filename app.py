@@ -1,6 +1,8 @@
 import os
 import pickle
 import sys
+import requests
+from urllib.parse import urlencode
 
 import pandas as pd
 import streamlit as st
@@ -8,6 +10,37 @@ import streamlit as st
 from src.recomend import popular_items
 from src.utils import get_user_loggins, read_data
 
+
+def download_and_extract_dataset(filename: str):
+    base_url = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?'
+    # Установить путь к файлу и URL для загрузки датасета
+    if filename == 'interactions.csv':
+        url = "https://disk.yandex.ru/d/_ATsGOU_LMzPPg?direct=1"
+    elif filename == 'items.csv':
+        url = "https://disk.yandex.ru/d/sT6izpVyyDZQVA?direct=1"
+    elif filename == 'users.csv':
+        url = "https://disk.yandex.ru/d/PN6yRVPBBJycLg?direct=1"
+    elif filename == 'als.pickle':
+        url = "https://disk.yandex.ru/d/EQ-xiSy6fxCy1Q?direct=1"
+    elif filename == 'bm25.pickle':
+        url = "https://disk.yandex.ru/d/cIPTc4LhgAYLGg?direct=1"
+
+    os.makedirs("src/model", exist_ok=True)
+    os.makedirs("src/data", exist_ok=True)
+
+    if (filename == "bm25.pickle" or filename == "als.pickle"):
+        pathfilename = "src/model/" + filename
+    else:
+        pathfilename = "src/data/" + filename
+
+    # Получаем загрузочную ссылку
+    final_url = base_url + urlencode(dict(public_key=url))
+    response = requests.get(final_url)
+    download_url = response.json()['href']
+
+    download_response = requests.get(download_url)
+    with open(pathfilename, 'wb') as f:   # Здесь укажите нужный путь к файлу
+        f.write(download_response.content)
 
 def create_columns_with_data(st, k: int, data: list):
     """
@@ -57,6 +90,22 @@ def create_columns_with_data(st, k: int, data: list):
         columns[i].write(f"**Жанры:** {item['genres']}")
 
 
+if not os.path.isfile(os.path.join(sys.path[1], "src/data/interactions.csv")):
+    download_and_extract_dataset("interactions.csv")
+
+if not os.path.isfile(os.path.join(sys.path[1], "src/data/items.csv")):
+    download_and_extract_dataset("items.csv")
+
+if not os.path.isfile(os.path.join(sys.path[1], "src/data/users.csv")):
+    download_and_extract_dataset("users.csv")
+
+if not os.path.isfile(os.path.join(sys.path[1], "src/model/als.pickle")):
+    download_and_extract_dataset("als.pickle")
+
+if not os.path.isfile(os.path.join(sys.path[1], "src/model/bm25.pickle")):
+    download_and_extract_dataset("bm25.pickle")
+
+
 intercations, data, data_items = read_data(os.path.join(sys.path[1], "src"))
 
 users = get_user_loggins(data)
@@ -65,8 +114,7 @@ query_params = st.experimental_get_query_params()
 nickname = query_params.get("nickname", [None])[0]
 
 if nickname is None:
-    st.set_page_config(page_title="DontReadMe.com",
-                       page_icon="📘", layout="wide")
+    st.set_page_config(page_title="DontReadMe.com", page_icon="📘", layout="wide")
 
     row0_1, row0_2, row0_3, row0_4, row0_5 = st.columns((2, 2, 2, 2, 2))
 
@@ -80,8 +128,7 @@ if nickname is None:
 
     row2_1, row2_2, row2_3 = st.columns((2, 2, 2))
 
-    nickname = row2_2.text_input(
-        "**Nickname**", placeholder="Please enter your id")
+    nickname = row2_2.text_input("**Nickname**", placeholder="Please enter your id")
     if row2_2.button("Dont click me", type="primary"):
         if int(nickname) in users:
             row2_2.success("Match found!")
@@ -90,8 +137,7 @@ if nickname is None:
         else:
             row2_2.error("Match not found!")
 else:
-    st.set_page_config(page_title="DontReadMe.com",
-                       page_icon="📘", layout="wide")
+    st.set_page_config(page_title="DontReadMe.com", page_icon="📘", layout="wide")
 
     k = 5
 
@@ -119,20 +165,20 @@ else:
                 item_model = pickle.load(f)
             similar_items = item_model.similar_items(id_item, k)
             similar = pd.DataFrame(
-                {"col_id": similar_items[0][0],
-                    "similarity": similar_items[1][0]},
+                {"col_id": similar_items[0][0], "similarity": similar_items[1][0]},
             )
-            items_inv_mapping = dict(
-                enumerate(intercations["item_id"].unique()))
+            items_inv_mapping = dict(enumerate(intercations["item_id"].unique()))
             items_mapping = {v: k for k, v in items_inv_mapping.items()}
             item_titles = pd.Series(
-                data_items["title"].values, index=data_items["id"],
+                data_items["title"].values,
+                index=data_items["id"],
             ).to_dict()
             similar["item_id"] = similar["col_id"].map(items_inv_mapping.get)
             similar["title"] = similar["item_id"].map(item_titles.get)
             create_columns_with_data(
-                row2_2, k, data=data_items[data_items["title"].isin(
-                    similar["title"])],
+                row2_2,
+                k,
+                data=data_items[data_items["title"].isin(similar["title"])],
             )
         else:
             row2_2.error("Match not found!")
@@ -157,7 +203,8 @@ else:
     users_inv_mapping = dict(enumerate(intercations["user_id"].unique()))
     users_mapping = {v: k for k, v in users_inv_mapping.items()}
     item_titles = pd.Series(
-        data_items["title"].values, index=data_items["id"],
+        data_items["title"].values,
+        index=data_items["id"],
     ).to_dict()
 
     user_item_list = []
@@ -165,10 +212,11 @@ else:
         user_id = users_inv_mapping[uid]
         user_mask = intercations["user_id"] == user_id
 
-        user_items = intercations.loc[user_mask,
-                                      "item_id"].map(item_titles.get)
+        user_items = intercations.loc[user_mask, "item_id"].map(item_titles.get)
         user_item_list.extend(user_items.values)
 
     create_columns_with_data(
-        row2_2, k, data=data_items[data_items["title"].isin(user_item_list)],
+        row2_2,
+        k,
+        data=data_items[data_items["title"].isin(user_item_list)],
     )
