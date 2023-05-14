@@ -33,19 +33,19 @@ def create_columns_with_data(st, k: int, data: list):
     for i in range(num_columns):
         item = data.iloc[i]
 
-        ## Search for a random photo on Unsplash
+        # Search for a random photo on Unsplash
         # photo = api.photo.random()
 
-        ## Get the URL of the photo
+        # Get the URL of the photo
         # photo_url = photo[0].urls.raw
 
         # Download the image
         # response = requests.get(photo_url)
         # img = Image.open(BytesIO(response.content))
 
-        ## Resize the image to 400x300 pixels
+        # Resize the image to 400x300 pixels
         # img = img.resize((200, 300))
-        ## Display the image
+        # Display the image
         # columns[i].image(img, width=200)
 
         # Display the title
@@ -65,7 +65,8 @@ query_params = st.experimental_get_query_params()
 nickname = query_params.get("nickname", [None])[0]
 
 if nickname is None:
-    st.set_page_config(page_title="DontReadMe.com", page_icon="📘", layout="wide")
+    st.set_page_config(page_title="DontReadMe.com",
+                       page_icon="📘", layout="wide")
 
     row0_1, row0_2, row0_3, row0_4, row0_5 = st.columns((2, 2, 2, 2, 2))
 
@@ -74,12 +75,13 @@ if nickname is None:
     row1_1, row1_2, row1_3 = st.columns((2, 2, 2))
 
     row1_2.subheader(
-        ":blue[Cкоро ты узнаешь, что такое настоящая зависимость от чтения.]"
+        ":blue[Cкоро ты узнаешь, что такое настоящая зависимость от чтения.]",
     )
 
     row2_1, row2_2, row2_3 = st.columns((2, 2, 2))
 
-    nickname = row2_2.text_input("**Nickname**", placeholder="Please enter your id")
+    nickname = row2_2.text_input(
+        "**Nickname**", placeholder="Please enter your id")
     if row2_2.button("Dont click me", type="primary"):
         if int(nickname) in users:
             row2_2.success("Match found!")
@@ -88,7 +90,8 @@ if nickname is None:
         else:
             row2_2.error("Match not found!")
 else:
-    st.set_page_config(page_title="DontReadMe.com", page_icon="📘", layout="wide")
+    st.set_page_config(page_title="DontReadMe.com",
+                       page_icon="📘", layout="wide")
 
     k = 5
 
@@ -99,7 +102,7 @@ else:
     row1_1, row1_2, row1_3 = st.columns((2, 2, 2))
 
     row1_2.subheader(
-        ":blue[Cкоро ты узнаешь, что такое настоящая зависимость от чтения.]"
+        ":blue[Cкоро ты узнаешь, что такое настоящая зависимость от чтения.]",
     )
 
     row2_1, row2_2, row2_3 = st.columns((0.5, 2, 0.5))
@@ -116,17 +119,20 @@ else:
                 item_model = pickle.load(f)
             similar_items = item_model.similar_items(id_item, k)
             similar = pd.DataFrame(
-                {"col_id": similar_items[0][0], "similarity": similar_items[1][0]}
+                {"col_id": similar_items[0][0],
+                    "similarity": similar_items[1][0]},
             )
-            items_inv_mapping = dict(enumerate(intercations["item_id"].unique()))
+            items_inv_mapping = dict(
+                enumerate(intercations["item_id"].unique()))
             items_mapping = {v: k for k, v in items_inv_mapping.items()}
             item_titles = pd.Series(
-                data_items["title"].values, index=data_items["id"]
+                data_items["title"].values, index=data_items["id"],
             ).to_dict()
             similar["item_id"] = similar["col_id"].map(items_inv_mapping.get)
             similar["title"] = similar["item_id"].map(item_titles.get)
             create_columns_with_data(
-                row2_2, k, data=data_items[data_items["title"].isin(similar["title"])]
+                row2_2, k, data=data_items[data_items["title"].isin(
+                    similar["title"])],
             )
         else:
             row2_2.error("Match not found!")
@@ -151,7 +157,7 @@ else:
     users_inv_mapping = dict(enumerate(intercations["user_id"].unique()))
     users_mapping = {v: k for k, v in users_inv_mapping.items()}
     item_titles = pd.Series(
-        data_items["title"].values, index=data_items["id"]
+        data_items["title"].values, index=data_items["id"],
     ).to_dict()
 
     user_item_list = []
@@ -159,9 +165,10 @@ else:
         user_id = users_inv_mapping[uid]
         user_mask = intercations["user_id"] == user_id
 
-        user_items = intercations.loc[user_mask, "item_id"].map(item_titles.get)
+        user_items = intercations.loc[user_mask,
+                                      "item_id"].map(item_titles.get)
         user_item_list.extend(user_items.values)
 
     create_columns_with_data(
-        row2_2, k, data=data_items[data_items["title"].isin(user_item_list)]
+        row2_2, k, data=data_items[data_items["title"].isin(user_item_list)],
     )

@@ -10,7 +10,7 @@ plugins:
   - search
   - autorefs
   - mkdocstrings:
-      handlers: 
+      handlers:
         numpy: {type: numpy}
 
 theme:

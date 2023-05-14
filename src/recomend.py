@@ -57,4 +57,3 @@ def popular_items(
     output = count_titles.sort_values(by="count", ascending=False)
     output = output["title"].values[:n_items]
     return output
-

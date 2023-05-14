@@ -91,7 +91,7 @@ def get_coo_matrix(
                 intercations[user_col].map(users_mapping.get),
                 intercations[item_col].map(items_mapping.get),
             ),
-        )
+        ),
     )
     return interaction_matrix
 
