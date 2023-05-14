@@ -12,23 +12,23 @@ from src.utils import get_user_loggins, read_data
 
 
 def download_and_extract_dataset(filename: str):
-    base_url = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?'
+    base_url = "https://cloud-api.yandex.net/v1/disk/public/resources/download?"
     # Установить путь к файлу и URL для загрузки датасета
-    if filename == 'interactions.csv':
+    if filename == "interactions.csv":
         url = "https://disk.yandex.ru/d/_ATsGOU_LMzPPg?direct=1"
-    elif filename == 'items.csv':
+    elif filename == "items.csv":
         url = "https://disk.yandex.ru/d/sT6izpVyyDZQVA?direct=1"
-    elif filename == 'users.csv':
+    elif filename == "users.csv":
         url = "https://disk.yandex.ru/d/PN6yRVPBBJycLg?direct=1"
-    elif filename == 'als.pickle':
+    elif filename == "als.pickle":
         url = "https://disk.yandex.ru/d/EQ-xiSy6fxCy1Q?direct=1"
-    elif filename == 'bm25.pickle':
+    elif filename == "bm25.pickle":
         url = "https://disk.yandex.ru/d/cIPTc4LhgAYLGg?direct=1"
 
     os.makedirs("src/model", exist_ok=True)
     os.makedirs("src/data", exist_ok=True)
 
-    if (filename == "bm25.pickle" or filename == "als.pickle"):
+    if filename == "bm25.pickle" or filename == "als.pickle":
         pathfilename = "src/model/" + filename
     else:
         pathfilename = "src/data/" + filename
@@ -36,11 +36,12 @@ def download_and_extract_dataset(filename: str):
     # Получаем загрузочную ссылку
     final_url = base_url + urlencode(dict(public_key=url))
     response = requests.get(final_url)
-    download_url = response.json()['href']
+    download_url = response.json()["href"]
 
     download_response = requests.get(download_url)
-    with open(pathfilename, 'wb') as f:   # Здесь укажите нужный путь к файлу
+    with open(pathfilename, "wb") as f:  # Здесь укажите нужный путь к файлу
         f.write(download_response.content)
+
 
 def create_columns_with_data(st, k: int, data: list):
     """

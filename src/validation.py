@@ -119,10 +119,8 @@ class TimeRangeSplit:
 
             if self.filter_already_seen:
                 user_item = [user_column, item_column]
-                train_pairs = df.loc[train_idx,
-                                     user_item].set_index(user_item).index
-                test_pairs = df.loc[test_idx, user_item].set_index(
-                    user_item).index
+                train_pairs = df.loc[train_idx, user_item].set_index(user_item).index
+                test_pairs = df.loc[test_idx, user_item].set_index(user_item).index
                 intersection = train_pairs.intersection(test_pairs)
                 test_idx = test_idx[~test_pairs.isin(intersection)]
                 # test_mask = rd.df.index.isin(test_idx)
@@ -148,7 +146,7 @@ class TimeRangeSplit:
         return max(0, len(date_range) - 1)
 
 
-def validation_bpr(folds_with_stats, df, users_mapping, items_mapping):
+def validation_bpr(folds_with_stats, df, users_mapping, items_mapping, k=10):
     """Run k-fold cross-validation for Bayesian Personalized Ranking (BPR).
 
     For each fold, fit a BPR model on the training set, and evaluate it on
@@ -177,18 +175,26 @@ def validation_bpr(folds_with_stats, df, users_mapping, items_mapping):
         test = df.loc[test_idx]
 
         train_mat = get_coo_matrix(
-            train, users_mapping=users_mapping, items_mapping=items_mapping,
+            train,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
         test_mat = get_coo_matrix(
-            test, users_mapping=users_mapping, items_mapping=items_mapping,
+            test,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
         model = BayesianPersonalizedRanking(factors=32, iterations=30)
         model.fit(train_mat.T, show_progress=False)
 
         metrics = ranking_metrics_at_k(
-            model, train_mat.T, test_mat.T, K=10, show_progress=False,
+            model,
+            train_mat.T,
+            test_mat.T,
+            K=k,
+            show_progress=False,
         )
 
         metrics["fold"] = run_no
@@ -196,7 +202,9 @@ def validation_bpr(folds_with_stats, df, users_mapping, items_mapping):
         wandb.log(metrics)
 
     data_mat = get_coo_matrix(
-        df, users_mapping=users_mapping, items_mapping=items_mapping,
+        df,
+        users_mapping=users_mapping,
+        items_mapping=items_mapping,
     ).tocsr()
 
     model = BayesianPersonalizedRanking(factors=32, iterations=30)
@@ -206,7 +214,9 @@ def validation_bpr(folds_with_stats, df, users_mapping, items_mapping):
         pickle.dump(model, f)
 
     artifact = wandb.Artifact("model", type="model")
-    with artifact.new_file(os.path.join(sys.path[0], "./model/bpr.pickle"), mode="wb") as file:
+    with artifact.new_file(
+        os.path.join(sys.path[0], "./model/bpr.pickle"), mode="wb"
+    ) as file:
         pickle.dump(model, file)
 
     wandb.log_artifact(artifact)
@@ -214,7 +224,7 @@ def validation_bpr(folds_with_stats, df, users_mapping, items_mapping):
     wandb.finish()
 
 
-def validation_als(folds_with_stats, df, users_mapping, items_mapping):
+def validation_als(folds_with_stats, df, users_mapping, items_mapping, k=10):
     """
     Perform k-fold cross-validation on the ALS model.
 
@@ -241,25 +251,35 @@ def validation_als(folds_with_stats, df, users_mapping, items_mapping):
         test = df.loc[test_idx]
 
         train_mat = get_coo_matrix(
-            train, users_mapping=users_mapping, items_mapping=items_mapping,
+            train,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
         test_mat = get_coo_matrix(
-            test, users_mapping=users_mapping, items_mapping=items_mapping,
+            test,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
         model = AlternatingLeastSquares(factors=32, iterations=30)
         model.fit(train_mat.T, show_progress=False)
 
         metrics = ranking_metrics_at_k(
-            model, train_mat.T, test_mat.T, K=10, show_progress=False,
+            model,
+            train_mat.T,
+            test_mat.T,
+            K=k,
+            show_progress=False,
         )
         metrics["fold"] = run_no
 
         wandb.log(metrics)
 
     data_mat = get_coo_matrix(
-        df, users_mapping=users_mapping, items_mapping=items_mapping,
+        df,
+        users_mapping=users_mapping,
+        items_mapping=items_mapping,
     ).tocsr()
 
     model = AlternatingLeastSquares(factors=32, iterations=30)
@@ -269,7 +289,9 @@ def validation_als(folds_with_stats, df, users_mapping, items_mapping):
         pickle.dump(model, f)
 
     artifact = wandb.Artifact("model", type="model")
-    with artifact.new_file(os.path.join(sys.path[0], "./model/als.pickle"), mode="wb") as file:
+    with artifact.new_file(
+        os.path.join(sys.path[0], "./model/als.pickle"), mode="wb"
+    ) as file:
         pickle.dump(model, file)
 
     wandb.log_artifact(artifact)
@@ -277,7 +299,7 @@ def validation_als(folds_with_stats, df, users_mapping, items_mapping):
     wandb.finish()
 
 
-def validation_tfidf(folds_with_stats, df, users_mapping, items_mapping):
+def validation_tfidf(folds_with_stats, df, users_mapping, items_mapping, k=10):
     """
     Train and evaluate a TF-IDF recommender on cross-validation folds.
 
@@ -307,35 +329,47 @@ def validation_tfidf(folds_with_stats, df, users_mapping, items_mapping):
         test = df.loc[test_idx]
 
         train_mat = get_coo_matrix(
-            train, users_mapping=users_mapping, items_mapping=items_mapping,
+            train,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
         test_mat = get_coo_matrix(
-            test, users_mapping=users_mapping, items_mapping=items_mapping,
+            test,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
-        model = TFIDFRecommender(K=10)
+        model = TFIDFRecommender(K=k)
         model.fit(train_mat, show_progress=False)
 
         metrics = ranking_metrics_at_k(
-            model, train_mat, test_mat, K=10, show_progress=False,
+            model,
+            train_mat,
+            test_mat,
+            K=k,
+            show_progress=False,
         )
         metrics["fold"] = run_no
 
         wandb.log(metrics)
 
     data_mat = get_coo_matrix(
-        df, users_mapping=users_mapping, items_mapping=items_mapping,
+        df,
+        users_mapping=users_mapping,
+        items_mapping=items_mapping,
     ).tocsr()
 
-    model = TFIDFRecommender(K=10)
+    model = TFIDFRecommender(K=k)
     model.fit(data_mat, show_progress=False)
 
     with open(os.path.join(sys.path[0], "./model/tfidf.pickle"), "wb") as f:
         pickle.dump(model, f)
 
     artifact = wandb.Artifact("model", type="model")
-    with artifact.new_file(os.path.join(sys.path[0], "./model/tfidf.pickle"), mode="wb") as file:
+    with artifact.new_file(
+        os.path.join(sys.path[0], "./model/tfidf.pickle"), mode="wb"
+    ) as file:
         pickle.dump(model, file)
 
     wandb.log_artifact(artifact)
@@ -343,7 +377,7 @@ def validation_tfidf(folds_with_stats, df, users_mapping, items_mapping):
     wandb.finish()
 
 
-def validation_bm25(folds_with_stats, df, users_mapping, items_mapping):
+def validation_bm25(folds_with_stats, df, users_mapping, items_mapping, k=10):
     """
     Validate TF-IDF recommender using k-fold cross-validation and log results to WandB.
 
@@ -373,35 +407,47 @@ def validation_bm25(folds_with_stats, df, users_mapping, items_mapping):
         test = df.loc[test_idx]
 
         train_mat = get_coo_matrix(
-            train, users_mapping=users_mapping, items_mapping=items_mapping,
+            train,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
         test_mat = get_coo_matrix(
-            test, users_mapping=users_mapping, items_mapping=items_mapping,
+            test,
+            users_mapping=users_mapping,
+            items_mapping=items_mapping,
         ).tocsr()
 
-        model = BM25Recommender(K=10)
+        model = BM25Recommender(K=k)
         model.fit(train_mat, show_progress=False)
 
         metrics = ranking_metrics_at_k(
-            model, train_mat, test_mat, K=10, show_progress=False,
+            model,
+            train_mat,
+            test_mat,
+            K=k,
+            show_progress=False,
         )
         metrics["fold"] = run_no
 
         wandb.log(metrics)
 
     data_mat = get_coo_matrix(
-        df, users_mapping=users_mapping, items_mapping=items_mapping,
+        df,
+        users_mapping=users_mapping,
+        items_mapping=items_mapping,
     ).tocsr()
 
-    model = BM25Recommender(K=10)
+    model = BM25Recommender(K=k)
     model.fit(data_mat, show_progress=False)
 
     with open(os.path.join(sys.path[0], "./model/bm25.pickle"), "wb") as f:
         pickle.dump(model, f)
 
     artifact = wandb.Artifact("model", type="model")
-    with artifact.new_file(os.path.join(sys.path[0], "./model/bm25.pickle"), mode="wb") as file:
+    with artifact.new_file(
+        os.path.join(sys.path[0], "./model/bm25.pickle"), mode="wb"
+    ) as file:
         pickle.dump(model, file)
 
     wandb.log_artifact(artifact)
@@ -409,11 +455,10 @@ def validation_bm25(folds_with_stats, df, users_mapping, items_mapping):
     wandb.finish()
 
 
-def main():
+def main(folds=7, k=10):
     intercations, _, _ = read_data(os.path.join(sys.path[0]))
 
     last_date = intercations["start_date"].max().normalize()
-    folds = 7
     start_date = last_date - pd.Timedelta(days=folds)
 
     cv = TimeRangeSplit(start_date=start_date, periods=folds + 1)
@@ -428,28 +473,22 @@ def main():
         ),
     )
     wandb.init(project="MFDP", name="validation")
-    folds_info_with_stats = pd.DataFrame(
-        [info for _, _, info in folds_with_stats])
-    folds_info_with_stats.to_csv(os.path.join(
-        sys.path[0], "./data/folds_info.csv"))
+    folds_info_with_stats = pd.DataFrame([info for _, _, info in folds_with_stats])
+    folds_info_with_stats.to_csv(os.path.join(sys.path[0], "./data/folds_info.csv"))
     wb_fold_info = wandb.Table(dataframe=folds_info_with_stats)
     wandb.log({"fold info": wb_fold_info})
     wandb.finish()
 
     users_mapping, items_mapping = get_mapping(intercations)
 
-    validation_bpr(folds_with_stats, intercations,
-                   users_mapping, items_mapping)
+    validation_bpr(folds_with_stats, intercations, users_mapping, items_mapping, k)
 
-    validation_als(folds_with_stats, intercations,
-                   users_mapping, items_mapping)
+    validation_als(folds_with_stats, intercations, users_mapping, items_mapping, k)
 
-    validation_tfidf(folds_with_stats, intercations,
-                     users_mapping, items_mapping)
+    validation_tfidf(folds_with_stats, intercations, users_mapping, items_mapping, k)
 
-    validation_bm25(folds_with_stats, intercations,
-                    users_mapping, items_mapping)
+    validation_bm25(folds_with_stats, intercations, users_mapping, items_mapping, k)
 
 
 if __name__ == "__main__":
-    main()
+    main(folds=7, k=50)
