@@ -7,8 +7,8 @@ from urllib.parse import urlencode
 import pandas as pd
 import streamlit as st
 
-from src.recomend import popular_items
-from src.utils import get_user_loggins, read_data
+from src.recomend import chat, popular_items, recomend_als, summarize
+from src.utils import read_data
 
 
 def download_and_extract_dataset(filename: str):
@@ -56,7 +56,10 @@ def create_columns_with_data(st, k: int, data: list):
     data : list
         The list of dictionaries containing the data.
     """
-    if len(data) < k:
+    if len(data) < k and len(data) != 0:
+        # st.error("The number of data points should be greater than or equal to k.")
+        k = len(data)
+    elif len(data) == 0:
         st.error("The number of data points should be greater than or equal to k.")
         return
 
@@ -109,7 +112,7 @@ if not os.path.isfile(os.path.join(sys.path[1], "src/model/bm25.pickle")):
 
 intercations, data, data_items = read_data(os.path.join(sys.path[1], "src"))
 
-users = get_user_loggins(data)
+users = data["user_id"].unique().tolist()
 
 query_params = st.experimental_get_query_params()
 nickname = query_params.get("nickname", [None])[0]
@@ -129,10 +132,9 @@ if nickname is None:
 
     row2_1, row2_2, row2_3 = st.columns((2, 2, 2))
 
-    nickname = row2_2.text_input("**Nickname**", placeholder="Please enter your id")
+    nickname = row2_2.text_input("**Nickname**", placeholder="Please enter nickname")
     if row2_2.button("Dont click me", type="primary"):
         if int(nickname) in users:
-            row2_2.success("Match found!")
             st.experimental_set_query_params(nickname=int(nickname))
             # st.experimental_rerun()
         else:
@@ -161,25 +163,17 @@ else:
     if button2:
         if str(text) in list(data_items["title"].unique()):
             row2_2.success("Match found!")
-            id_item = data_items[data_items["title"] == text]["id"]
+            id_item = data_items[data_items["title"] == text]["id"].values[0]
+
             with open(os.path.join("./src/model/bm25.pickle"), "rb") as f:
                 item_model = pickle.load(f)
-            similar_items = item_model.similar_items(id_item, k)
-            similar = pd.DataFrame(
-                {"col_id": similar_items[0][0], "similarity": similar_items[1][0]},
-            )
-            items_inv_mapping = dict(enumerate(intercations["item_id"].unique()))
-            items_mapping = {v: k for k, v in items_inv_mapping.items()}
-            item_titles = pd.Series(
-                data_items["title"].values,
-                index=data_items["id"],
-            ).to_dict()
-            similar["item_id"] = similar["col_id"].map(items_inv_mapping.get)
-            similar["title"] = similar["item_id"].map(item_titles.get)
+            similar_items = item_model.similar_items(id_item)[0][1:]
+            books = data_items[data_items["id"].isin(similar_items)]
+
             create_columns_with_data(
                 row2_2,
                 k,
-                data=data_items[data_items["title"].isin(similar["title"])],
+                data=books,
             )
         else:
             row2_2.error("Match not found!")
@@ -195,29 +189,23 @@ else:
     row2_2.divider()
 
     row2_2.subheader("Рекомендации")
-    with open(os.path.join("./src/model/als.pickle"), "rb") as f:
-        user_model = pickle.load(f)
-
-    users = user_model.similar_users(int(nickname), N=5)
-    users = [i[0] for i in users]
-
-    users_inv_mapping = dict(enumerate(intercations["user_id"].unique()))
-    users_mapping = {v: k for k, v in users_inv_mapping.items()}
-    item_titles = pd.Series(
-        data_items["title"].values,
-        index=data_items["id"],
-    ).to_dict()
-
-    user_item_list = []
-    for uid in users:
-        user_id = users_inv_mapping[uid]
-        user_mask = intercations["user_id"] == user_id
-
-        user_items = intercations.loc[user_mask, "item_id"].map(item_titles.get)
-        user_item_list.extend(user_items.values)
+    data_items = recomend_als(nickname)
 
     create_columns_with_data(
         row2_2,
         k,
-        data=data_items[data_items["title"].isin(user_item_list)],
+        data=data_items,
     )
+
+    row3_1, row3_2, row3_3 = st.columns((0.5, 2, 0.5))
+    row3_2.divider()
+    row3_2.subheader("Кратко-бот")
+    text_to_summarize = row3_2.text_input("Введите описание книги")
+    if text_to_summarize:
+        row3_2.write(summarize(text_to_summarize))
+
+    row3_2.divider()
+    row3_2.subheader("Чат-бот")
+    text_to_asnwer = row3_2.text_input("Введите описание книги", key='other')
+    if text_to_asnwer:
+        row3_2.write(chat(text_to_summarize))

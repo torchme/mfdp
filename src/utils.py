@@ -1,11 +1,11 @@
 """Utils."""
 from __future__ import annotations
 
+import datetime
 import os
 
-import pandas as pd
 import numpy as np
-
+import pandas as pd
 import scipy.sparse as sp
 
 
@@ -49,78 +49,48 @@ def read_data(path: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     return data, data_users, data_items
 
 
-def get_coo_matrix(
-    intercations: pd.DataFrame,
-    user_col: str = "user_id",
-    item_col: str = "item_id",
-    weight_col: str = None,
-    users_mapping: dict = None,
-    items_mapping: dict = None,
-) -> sp.coo_matrix:
-    """Create a COO sparse matrix from a pandas DataFrame.
+def create_weighted_interaction_matrix(data: pd.DataFrame, alpha=0.01):
+    """
+    Create a weighted interaction matrix based on the input DataFrame.
 
     Parameters
     ----------
     df : pd.DataFrame
-        DataFrame containing the user-item interactions.
-    user_col : str, optional
-        Name of the user ID column in `df`, by default 'user_id'.
-    item_col : str, optional
-        Name of the item ID column in `df`, by default 'item_id'.
-    weight_col : str, optional
-        Name of the weight column in `df`, by default None.
-    users_mapping : dict, optional
-        A mapping from user IDs to row indices in the resulting matrix, by default None.
-    items_mapping : dict, optional
-        A mapping from item IDs to column indices in the resulting matrix, by default None.
+        The input DataFrame containing interactions between users and items.
+    alpha : float, optional
+        A hyperparameter used to weight interactions based on recency. Default is 0.01.
 
     Returns
     -------
-    sp.coo_matrix
-        A sparse COO matrix representing the user-item interactions.
+    Tuple[pd.DataFrame, sp.coo_matrix]
+        The input DataFrame with added columns for days since interaction, weight, and target, and a sparse matrix
+        representing the weighted interactions.
     """
-    if weight_col is None:
-        weights = np.ones(len(intercations), dtype=np.float32)
-    else:
-        weights = intercations[weight_col].astype(np.float32)
 
-    interaction_matrix = sp.coo_matrix(
+    data.loc[:, "target"] = (data["rating"].fillna(0) * 20 + data["progress"]) / 2
+
+    interactions_sparse = sp.coo_matrix(
         (
-            weights,
-            (
-                intercations[user_col].map(users_mapping.get),
-                intercations[item_col].map(items_mapping.get),
-            ),
-        ),
+            data["target"].astype(float),
+            (data["user_id"].astype(int), data["item_id"].astype(int)),
+        )
     )
-    return interaction_matrix
+    return data, interactions_sparse
 
 
-def get_mapping(intercations: pd.DataFrame):
+def get_user_loggins(data: pd.DataFrame) -> pd.DataFrame:
     """
-    Returns two mappings for user and item IDs to integer indices.
+    Create a user logins DataFrame based on the input DataFrame.
 
     Parameters
     ----------
-    df : pandas.DataFrame
-        The input DataFrame containing user and item IDs.
+    df : pd.DataFrame
+        The input DataFrame containing interactions between users and items.
 
     Returns
     -------
-    tuple of two dictionaries
-        The first dictionary maps user IDs to integer indices, and the second
-        dictionary maps item IDs to integer indices.
+    pd.DataFrame
+        The input DataFrame with added columns for days since interaction, weight, and target, and a sparse matrix
     """
-    users_inv_mapping = dict(enumerate(intercations["user_id"].unique()))
-    users_mapping = {v: k for k, v in users_inv_mapping.items()}
-
-    items_inv_mapping = dict(enumerate(intercations["item_id"].unique()))
-    items_mapping = {v: k for k, v in items_inv_mapping.items()}
-
-    return users_mapping, items_mapping
-
-
-def get_user_loggins(data):
-    """Extracts unique user IDs from the given data."""
-    users = data['user_id'].unique()
-    return list(users)
+    
+    return data
