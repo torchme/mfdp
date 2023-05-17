@@ -1,14 +1,18 @@
 """recomend.py"""
 from __future__ import annotations
-import os, sys
-import wandb
+
+import os
 import pickle
 
-import torch
-from transformers import AutoModelForSeq2SeqLM, T5TokenizerFast
-from transformers import T5ForConditionalGeneration, T5Tokenizer
-
 import pandas as pd
+import torch
+from gpt4all import GPT4All
+from transformers import (
+    AutoModelForSeq2SeqLM,
+    T5ForConditionalGeneration,
+    T5Tokenizer,
+    T5TokenizerFast,
+)
 
 from .utils import create_weighted_interaction_matrix, read_data
 
@@ -100,7 +104,7 @@ def summarize(input_sequences: str):
     return summary[0]
 
 
-def chat(text, **kwargs):
+def chat_t5(text, **kwargs):
     """
     Генерация ответа на основе модели T5 LLM.
 
@@ -114,25 +118,44 @@ def chat(text, **kwargs):
 
     tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
     model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
-    task_prefix = "answer | "
+    task_prefix = "Chat: "
     inputs = tokenizer(task_prefix + text, return_tensors="pt")
     with torch.no_grad():
         hypotheses = model.generate(**inputs, num_beams=5, **kwargs)
     return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
 
 
+def chat(text):
+    gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy")
+    messages = [{"role": "user", "content": text}]
+
+    return gptj.chat_completion(messages)["choices"][0]["content"]
+
+
 def recomend_als(user_id):
     """
     Рекомендация пользователя на основе модели ALS.
     """
-    with open('./src/model/als.pickle', 'rb') as f:
+    with open("./src/model/als.pickle", "rb") as f:
         model = pickle.load(f)
     similar_users = model.similar_users(int(user_id))[0]
     if similar_users == []:
         similar_users = model.similar_users(-1)[0]
-    intercations, _, items_data = read_data(os.path.join('./src/'))
+    intercations, _, items_data = read_data(os.path.join("./src/"))
     intercations, _ = create_weighted_interaction_matrix(intercations)
 
-    dataset = intercations[intercations['user_id'].isin(similar_users)].sort_values(by='target', ascending=False)['item_id']
-    items_data = items_data[items_data['id'].isin(dataset)]
+    dataset = intercations[intercations["user_id"].isin(similar_users)].sort_values(
+        by="target", ascending=False
+    )["item_id"]
+    items_data = items_data[items_data["id"].isin(dataset)]
     return items_data
+
+
+def recomend_bm25(item_id):
+    _, data_items, _ = read_data(os.path.join("./src/"))
+
+    with open(os.path.join("./src/model/bm25.pickle"), "rb") as f:
+        item_model = pickle.load(f)
+    similar_items = item_model.similar_items(item_id)[0][1:]
+    books = data_items[item_id["id"].isin(similar_items)]
+    return books

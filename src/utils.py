@@ -67,30 +67,14 @@ def create_weighted_interaction_matrix(data: pd.DataFrame, alpha=0.01):
         representing the weighted interactions.
     """
 
-    data.loc[:, "target"] = (data["rating"].fillna(0) * 20 + data["progress"]) / 2
+    data.loc[:, "target"] = (data["rating"].fillna(0)
+                             * 20 + data["progress"]) / 2
 
     interactions_sparse = sp.coo_matrix(
         (
             data["target"].astype(float),
             (data["user_id"].astype(int), data["item_id"].astype(int)),
-        )
+        ),
     )
     return data, interactions_sparse
 
-
-def get_user_loggins(data: pd.DataFrame) -> pd.DataFrame:
-    """
-    Create a user logins DataFrame based on the input DataFrame.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        The input DataFrame containing interactions between users and items.
-
-    Returns
-    -------
-    pd.DataFrame
-        The input DataFrame with added columns for days since interaction, weight, and target, and a sparse matrix
-    """
-    
-    return data
