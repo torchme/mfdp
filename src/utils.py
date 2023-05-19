@@ -67,8 +67,10 @@ def create_weighted_interaction_matrix(data: pd.DataFrame, alpha=0.01):
         representing the weighted interactions.
     """
 
-    data.loc[:, "target"] = (data["rating"].fillna(0)
-                             * 20 + data["progress"]) / 2
+    data.loc[:, "target"] = (
+        data["rating"].fillna(0)
+        * 20 + data["progress"]
+    ) / 2
 
     interactions_sparse = sp.coo_matrix(
         (
@@ -77,4 +79,3 @@ def create_weighted_interaction_matrix(data: pd.DataFrame, alpha=0.01):
         ),
     )
     return data, interactions_sparse
-

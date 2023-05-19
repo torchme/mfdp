@@ -116,8 +116,8 @@ def chat_t5(text, **kwargs):
     """
     MODEL_NAME = "cointegrated/rut5-base-multitask"
 
-    tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
-    model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
+    tokenizer = T5Tokenizer.from_pretrained('src/model/')
+    model = T5ForConditionalGeneration.from_pretrained('src/model/')
     task_prefix = "Chat: "
     inputs = tokenizer(task_prefix + text, return_tensors="pt")
     with torch.no_grad():
@@ -145,7 +145,7 @@ def recomend_als(user_id):
     intercations, _ = create_weighted_interaction_matrix(intercations)
 
     dataset = intercations[intercations["user_id"].isin(similar_users)].sort_values(
-        by="target", ascending=False
+        by="target", ascending=False,
     )["item_id"]
     items_data = items_data[items_data["id"].isin(dataset)]
     return items_data

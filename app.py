@@ -4,7 +4,7 @@ import streamlit as st
 
 from src.recomend import chat, popular_items, recomend_als, recomend_bm25, summarize
 from src.utils import read_data
-
+from src.load_data import load_file
 
 def create_product_card(st, k: int, data: list):
     """
@@ -41,7 +41,8 @@ def create_product_card(st, k: int, data: list):
 
 
 def main():
-    intercations, data, data_items = read_data(os.path.join(sys.path[1], "src"))
+    intercations, data, data_items = read_data(
+        os.path.join(sys.path[1], "src"))
 
     users = data["user_id"].unique().tolist()
 
@@ -49,7 +50,8 @@ def main():
     nickname = query_params.get("nickname", [None])[0]
 
     if nickname is None:
-        st.set_page_config(page_title="DontReadMe.com", page_icon="📘", layout="wide")
+        st.set_page_config(page_title="DontReadMe.com",
+                           page_icon="📘", layout="wide")
 
         _, _, row0_3, _, _ = st.columns((2, 2, 2, 2, 2))
 
@@ -64,7 +66,7 @@ def main():
         _, row2_2, _ = st.columns((2, 2, 2))
 
         nickname = row2_2.text_input(
-            "**Nickname**", placeholder="Please enter nickname"
+            "**Nickname**", placeholder="Please enter nickname",
         )
         if row2_2.button("Dont click me", type="primary"):
             if int(nickname) in users:
@@ -73,7 +75,8 @@ def main():
             else:
                 row2_2.error("Match not found!")
     else:
-        st.set_page_config(page_title="DontReadMe.com", page_icon="📘", layout="wide")
+        st.set_page_config(page_title="DontReadMe.com",
+                           page_icon="📘", layout="wide")
 
         k = 5
 
@@ -97,7 +100,8 @@ def main():
         if button2:
             if str(text) in list(data_items["title"].unique()):
                 row2_2.success("Match found!")
-                id_item = data_items[data_items["title"] == text]["id"].values[0]
+                id_item = data_items[data_items["title"]
+                                     == text]["id"].values[0]
 
                 books = recomend_bm25(id_item)
 
@@ -141,10 +145,12 @@ def main():
         # // Chat-bot
         row3_2.divider()
         row3_2.subheader("Чат-бот")
-        text_to_asnwer = row3_2.text_input("Можете спросить совет у бота", key="other")
-        if text_to_asnwer:
-            row3_2.write(chat(text_to_summarize))
+        #text_to_asnwer = row3_2.text_input(
+        #    "Можете спросить совет у бота", key="other")
+        #if text_to_asnwer:
+        #    row3_2.write(chat(text_to_summarize))
 
 
 if __name__ == "__main__":
+    load_file()
     main()

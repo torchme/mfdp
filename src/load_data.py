@@ -37,7 +37,7 @@ def download_and_extract_dataset(filename: str):
     download_url = response.json()["href"]
 
     download_response = requests.get(download_url)
-    with open(pathfilename, "wb") as f:  
+    with open(pathfilename, "wb") as f:
         f.write(download_response.content)
 
 
@@ -58,7 +58,6 @@ def check_upload():
         download_and_extract_dataset("bm25.pickle")
 
 
-
 def load_gpt():
     if not os.path.isfile(
         os.path.join(sys.path[0], "model/ggml-gpt4all-j-v1.3-groovy.bin")
@@ -69,9 +68,7 @@ def load_gpt():
 def load_t5():
     if not os.path.isfile(
         os.path.join(sys.path[0], "model/spiece.model")
-    ) or os.path.isfile(
-        os.path.join(sys.path[0], "model/pytorch_model.bin")
-    ):
+    ) or os.path.isfile(os.path.join(sys.path[0], "model/pytorch_model.bin")):
         MODEL_NAME = "cointegrated/rut5-base-multitask"
 
         tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
@@ -82,8 +79,11 @@ def load_t5():
         model.save_pretrained(SAVE_DIRECTORY)
 
 
+def load_file():
+    check_upload()
+    load_gpt()
+    load_t5()
+
+
 if __name__ == "__main__":
-    #check_upload()
-    #load_gpt()
-    #load_t5()
-)
+    load_file()

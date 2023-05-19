@@ -102,7 +102,7 @@ def fit_implicit_als(
 
         artifact = wandb.Artifact("als-model", type="pickle")
         with artifact.new_file(
-            os.path.join(sys.path[0], "./model/als.pickle"), mode="wb"
+            os.path.join(sys.path[0], "./model/als.pickle"), mode="wb",
         ) as f:
             pickle.dump(model, f)
         run.log_artifact(artifact)
@@ -156,7 +156,7 @@ def fit_implicit_bm25(
 
         artifact = wandb.Artifact("bm25-model", type="pickle")
         with artifact.new_file(
-            os.path.join(sys.path[0], "./model/bm25.pickle"), mode="wb"
+            os.path.join(sys.path[0], "./model/bm25.pickle"), mode="wb",
         ) as f:
             pickle.dump(model, f)
         run.log_artifact(artifact)
@@ -171,7 +171,8 @@ def main(folds=7, validation=False, algorithm="als"):
         for train, test in split_train_test_users(intercations, num_folds=folds):
 
             if algorithm == "als":
-                fit_implicit_als(train, test, iterations=25, factors=50, fold=run_no)
+                fit_implicit_als(train, test, iterations=25,
+                                 factors=50, fold=run_no)
             else:
                 fit_implicit_bm25(train, test, fold=run_no)
             run_no += 1
