@@ -185,4 +185,4 @@ def main(folds=7, validation=False, algorithm="als"):
 
 
 if __name__ == "__main__":
-    main(folds=3, algorithm="als", validation=True)
+    main(folds=3, algorithm="bm25", validation=False)

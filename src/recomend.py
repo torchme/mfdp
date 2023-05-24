@@ -24,7 +24,9 @@ def popular_items(
     threshold_progress: int = 40,
     n_items: int = 10,
 ):
-    """Recomends the top n popular items for a given genre.
+    """
+    Recomends the top n popular items for a given genre.
+
     Parameters
     ----------
     df : pd.DataFrame
@@ -126,10 +128,10 @@ def chat_t5(text, **kwargs):
 
 
 def chat(text):
-    gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy")
+    gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy", "./src/model/")
     messages = [{"role": "user", "content": text}]
 
-    return gptj.chat_completion(messages)["choices"][0]["content"]
+    return gptj.chat_completion(messages) #["choices"] #[0]["content"]
 
 
 def recomend_als(user_id):
@@ -152,10 +154,10 @@ def recomend_als(user_id):
 
 
 def recomend_bm25(item_id):
-    _, data_items, _ = read_data(os.path.join("./src/"))
+    _, _, items_data = read_data(os.path.join("./src/"))
 
     with open(os.path.join("./src/model/bm25.pickle"), "rb") as f:
         item_model = pickle.load(f)
-    similar_items = item_model.similar_items(item_id)[0][1:]
-    books = data_items[item_id["id"].isin(similar_items)]
+    similar_items = item_model.similar_items(int(item_id))[0][1:]
+    books = items_data[items_data["id"].isin(similar_items)]
     return books

@@ -28,9 +28,9 @@ def download_and_extract_dataset(filename: str):
     os.makedirs("src/data", exist_ok=True)
 
     if filename == "bm25.pickle" or filename == "als.pickle":
-        pathfilename = "src/model/" + filename
+        pathfilename = ".src/model/" + filename
     else:
-        pathfilename = "src/data/" + filename
+        pathfilename = ".src/data/" + filename
 
     final_url = base_url + urlencode(dict(public_key=url))
     response = requests.get(final_url)
@@ -42,39 +42,43 @@ def download_and_extract_dataset(filename: str):
 
 
 def check_upload():
-    if not os.path.isfile(os.path.join(sys.path[0], "data/interactions.csv")):
+
+    if not os.path.isfile(os.path.join(sys.path[1], "./src/data/interactions.csv")):
         download_and_extract_dataset("interactions.csv")
 
-    if not os.path.isfile(os.path.join(sys.path[0], "data/items.csv")):
+    if not os.path.isfile(os.path.join(sys.path[1], "./src/data/items.csv")):
         download_and_extract_dataset("items.csv")
 
-    if not os.path.isfile(os.path.join(sys.path[0], "data/users.csv")):
+    if not os.path.isfile(os.path.join(sys.path[1], "./src/data/users.csv")):
         download_and_extract_dataset("users.csv")
 
-    if not os.path.isfile(os.path.join(sys.path[0], "model/als.pickle")):
+    if not os.path.isfile(os.path.join(sys.path[1], "./src/model/als.pickle")):
         download_and_extract_dataset("als.pickle")
 
-    if not os.path.isfile(os.path.join(sys.path[0], "model/bm25.pickle")):
+    if not os.path.isfile(os.path.join(sys.path[1], "./src/model/bm25.pickle")):
         download_and_extract_dataset("bm25.pickle")
 
 
 def load_gpt():
-    if not os.path.isfile(
-        os.path.join(sys.path[0], "model/ggml-gpt4all-j-v1.3-groovy.bin")
-    ):
-        GPT4All.download_model("ggml-gpt4all-j-v1.3-groovy.bin", "src/model/")
+    path = os.path.join(sys.path[1], "./src/model/ggml-gpt4all-j-v1.3-groovy.bin")
+    status = os.path.isfile(path)
+    if not status:
+        GPT4All.download_model("ggml-gpt4all-j-v1.3-groovy.bin", "./src/model/")
 
 
 def load_t5():
-    if not os.path.isfile(
-        os.path.join(sys.path[0], "model/spiece.model")
-    ) or os.path.isfile(os.path.join(sys.path[0], "model/pytorch_model.bin")):
-        MODEL_NAME = "cointegrated/rut5-base-multitask"
+    path_modelone = os.path.join(sys.path[1], "./src/model/spiece.model")
+    status_one = os.path.isfile(path_modelone)
 
+    path_modeltwo = os.path.join(sys.path[1], "./src/model/pytorch_model.bin")
+    status_two = os.path.isfile(path_modeltwo)
+
+    if not status_one or not status_two:
+        MODEL_NAME = "cointegrated/rut5-base-multitask"
         tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
         model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
 
-        SAVE_DIRECTORY = "src/model/"
+        SAVE_DIRECTORY = ".src/model/"
         tokenizer.save_pretrained(SAVE_DIRECTORY)
         model.save_pretrained(SAVE_DIRECTORY)
 
