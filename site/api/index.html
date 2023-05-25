@@ -10,20 +10,20 @@
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
         <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
-
+    
       <script>
         // Current page data
         var mkdocs_page_name = "API Reference";
         var mkdocs_page_input_path = "api.md";
         var mkdocs_page_url = null;
       </script>
-
+    
     <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script>
+      <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -52,9 +52,53 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#src.recomend">src.recomend</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#src.recomend.chat">chat()</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.chat--parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.chat--returns">Returns</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.chat--example">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#src.recomend.chat_t5">chat_t5()</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.chat_t5--parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.chat_t5--returns">Returns</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#src.recomend.popular_items">popular_items()</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.popular_items--parameters">Parameters</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#src.recomend.popular_items--returns">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#src.recomend.recomend_als">recomend_als()</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.recomend_als--parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.recomend_als--returns">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#src.recomend.recomend_bm25">recomend_bm25()</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.recomend_bm25--parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.recomend_bm25--returns">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#src.recomend.summarize">summarize()</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.summarize--parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#src.recomend.summarize--returns">Returns</a>
     </li>
         </ul>
     </li>
@@ -62,23 +106,13 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#src.utils">src.utils</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.utils.get_coo_matrix">get_coo_matrix()</a>
+    <li class="toctree-l2"><a class="reference internal" href="#src.utils.create_weighted_interaction_matrix">create_weighted_interaction_matrix()</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.utils.get_coo_matrix--parameters">Parameters</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.utils.create_weighted_interaction_matrix--parameters">Parameters</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.utils.get_coo_matrix--returns">Returns</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.utils.create_weighted_interaction_matrix--returns">Returns</a>
     </li>
         </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.utils.get_mapping">get_mapping()</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.utils.get_mapping--parameters">Parameters</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.utils.get_mapping--returns">Returns</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.utils.get_user_loggins">get_user_loggins()</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#src.utils.read_data">read_data()</a>
         <ul>
@@ -94,45 +128,27 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#src.validation">src.validation</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.validation.TimeRangeSplit">TimeRangeSplit</a>
+    <li class="toctree-l2"><a class="reference internal" href="#src.validation.fit_implicit_als">fit_implicit_als()</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.TimeRangeSplit.__init__">__init__()</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.validation.fit_implicit_als--parameters">Parameters</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.TimeRangeSplit.get_n_splits">get_n_splits()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.TimeRangeSplit.split">split()</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.validation.fit_implicit_als--returns">Returns</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.validation.validation_als">validation_als()</a>
+    <li class="toctree-l2"><a class="reference internal" href="#src.validation.fit_implicit_bm25">fit_implicit_bm25()</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_als--parameters">Parameters</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.validation.fit_implicit_bm25--parameters">Parameters</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_als--returns">Returns</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.validation.fit_implicit_bm25--returns">Returns</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.validation.validation_bm25">validation_bm25()</a>
+    <li class="toctree-l2"><a class="reference internal" href="#src.validation.split_train_test_users">split_train_test_users()</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_bm25--parameters">Parameters</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.validation.split_train_test_users--parameters">Parameters</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_bm25--returns">Returns</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.validation.validation_bpr">validation_bpr()</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_bpr--parameters">Parameters</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_bpr--returns">Returns</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#src.validation.validation_tfidf">validation_tfidf()</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_tfidf--parameters">Parameters</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#src.validation.validation_tfidf--returns">Returns</a>
+    <li class="toctree-l3"><a class="reference internal" href="#src.validation.split_train_test_users--yields">Yields</a>
     </li>
         </ul>
     </li>
@@ -140,9 +156,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#app">app</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#app.create_columns_with_data">create_columns_with_data()</a>
+    <li class="toctree-l2"><a class="reference internal" href="#app.create_product_card">create_product_card()</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#app.create_columns_with_data--parameters">Parameters</a>
+    <li class="toctree-l3"><a class="reference internal" href="#app.create_product_card--parameters">Parameters</a>
     </li>
         </ul>
     </li>
@@ -157,7 +173,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="..">dontreadme-api</a>
-
+        
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
@@ -171,7 +187,7 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
-
+              
                 <h1 id="api">API</h1>
 <p><a href="../">About</a></p>
 <h2 id="recomendation">Recomendation</h2>
@@ -182,10 +198,10 @@
 
 <a id="src.recomend"></a>
   <div class="doc doc-contents first">
-
+  
       <p>recomend.py</p>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -201,6 +217,175 @@
 
 
 
+<h2 id="src.recomend.chat" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">chat</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A function that takes in a text message as a parameter and returns AI-generated text responses using GPT4All model.</p>
+<h4 id="src.recomend.chat--parameters">Parameters</h4>
+
+<details class="text-" open>
+  <summary>str</summary>
+  <p>A string representing the input text message.</p>
+</details>      <h4 id="src.recomend.chat--returns">Returns</h4>
+<p>list
+    A list of AI-generated text responses.</p>
+<h4 id="src.recomend.chat--example">Example</h4>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>chat("Hello, how are you?")
+["I'm fine, thank you. How about yourself?"]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+      <details class="quote">
+        <summary>Source code in <code>src/recomend.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">chat</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A function that takes in a text message as a parameter and returns AI-generated text responses using GPT4All model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        A string representing the input text message.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of AI-generated text responses.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; chat(&quot;Hello, how are you?&quot;)</span>
+<span class="sd">    [&quot;I&#39;m fine, thank you. How about yourself?&quot;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">gptj</span> <span class="o">=</span> <span class="n">GPT4All</span><span class="p">(</span><span class="s2">&quot;ggml-gpt4all-j-v1.3-groovy&quot;</span><span class="p">,</span> <span class="s2">&quot;./src/model/&quot;</span><span class="p">)</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">}]</span>
+
+    <span class="k">return</span> <span class="n">gptj</span><span class="o">.</span><span class="n">chat_completion</span><span class="p">(</span><span class="n">messages</span><span class="p">)[</span><span class="s2">&quot;choices&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.recomend.chat_t5" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">chat_t5</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Initializes the chatbot model and returns the model name.</p>
+<h4 id="src.recomend.chat_t5--parameters">Parameters</h4>
+
+<details class="text-" open>
+  <summary>str</summary>
+  <p>The input text to be processed by the chatbot model.</p>
+</details>      <p>**kwargs : dict
+    Optional keyword arguments to be passed to the chatbot model.</p>
+<h4 id="src.recomend.chat_t5--returns">Returns</h4>
+<p>str
+    The name of the chatbot model.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>src/recomend.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">chat_t5</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the chatbot model and returns the model name.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        The input text to be processed by the chatbot model.</span>
+<span class="sd">    **kwargs : dict</span>
+<span class="sd">        Optional keyword arguments to be passed to the chatbot model.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The name of the chatbot model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;cointegrated/rut5-base-multitask&quot;</span>
+
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">T5Tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;src/model/&quot;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">T5ForConditionalGeneration</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;src/model/&quot;</span><span class="p">)</span>
+    <span class="n">task_prefix</span> <span class="o">=</span> <span class="s2">&quot;Chat: &quot;</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">task_prefix</span> <span class="o">+</span> <span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">hypotheses</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">num_beams</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">hypotheses</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
 <h2 id="src.recomend.popular_items" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">popular_items</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data_items</span><span class="p">,</span> <span class="n">genre</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threshold_progress</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">n_items</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code>
 
@@ -208,10 +393,9 @@
 
 
   <div class="doc doc-contents ">
-
-      <p>Recomends the top n popular items for a given genre.
-Parameters</p>
-<hr />
+  
+      <p>Recomends the top n popular items for a given genre.</p>
+<h4 id="src.recomend.popular_items--parameters">Parameters</h4>
 
 <details class="df-" open>
   <summary>pd.DataFrame</summary>
@@ -240,20 +424,7 @@ Parameters</p>
 </details>
       <details class="quote">
         <summary>Source code in <code>src/recomend.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -292,14 +463,31 @@ Parameters</p>
 <span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
-<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">popular_items</span><span class="p">(</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">popular_items</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
     <span class="n">data_items</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
     <span class="n">genre</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">threshold_progress</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
     <span class="n">n_items</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recomends the top n popular items for a given genre.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Recomends the top n popular items for a given genre.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    df : pd.DataFrame</span>
@@ -351,6 +539,257 @@ Parameters</p>
 
 </div>
 
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.recomend.recomend_als" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">recomend_als</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Recommends books using the ALS algorithm.</p>
+<h4 id="src.recomend.recomend_als--parameters">Parameters</h4>
+
+<details class="user_id-" open>
+  <summary>int</summary>
+  <p>The ID of the user to find similar books to.</p>
+</details>      <h4 id="src.recomend.recomend_als--returns">Returns</h4>
+<p>pandas.DataFrame
+    A DataFrame containing information about the similar books.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>src/recomend.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">recomend_als</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recommends books using the ALS algorithm.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        The ID of the user to find similar books to.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A DataFrame containing information about the similar books.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./src/model/als.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">similar_users</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">similar_users</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_id</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">similar_users</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">similar_users</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">similar_users</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">intercations</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">items_data</span> <span class="o">=</span> <span class="n">read_data</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;./src/&quot;</span><span class="p">))</span>
+    <span class="n">intercations</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">create_weighted_interaction_matrix</span><span class="p">(</span><span class="n">intercations</span><span class="p">)</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">intercations</span><span class="p">[</span><span class="n">intercations</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">similar_users</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+        <span class="n">by</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">,</span>
+        <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)[</span><span class="s2">&quot;item_id&quot;</span><span class="p">]</span>
+    <span class="n">items_data</span> <span class="o">=</span> <span class="n">items_data</span><span class="p">[</span><span class="n">items_data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">dataset</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">items_data</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.recomend.recomend_bm25" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">recomend_bm25</span><span class="p">(</span><span class="n">item_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Recommends books similar to a given book ID using the BM25 algorithm.</p>
+<h4 id="src.recomend.recomend_bm25--parameters">Parameters</h4>
+
+<details class="item_id-" open>
+  <summary>int</summary>
+  <p>The ID of the book to find similar books to.</p>
+</details>      <h4 id="src.recomend.recomend_bm25--returns">Returns</h4>
+<p>pandas.DataFrame
+    A DataFrame containing information about the similar books.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>src/recomend.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">recomend_bm25</span><span class="p">(</span><span class="n">item_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Recommends books similar to a given book ID using the BM25 algorithm.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    item_id : int</span>
+<span class="sd">        The ID of the book to find similar books to.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A DataFrame containing information about the similar books.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">items_data</span> <span class="o">=</span> <span class="n">read_data</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;./src/&quot;</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;./src/model/bm25.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">item_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">similar_items</span> <span class="o">=</span> <span class="n">item_model</span><span class="o">.</span><span class="n">similar_items</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">item_id</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">books</span> <span class="o">=</span> <span class="n">items_data</span><span class="p">[</span><span class="n">items_data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">similar_items</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">books</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.recomend.summarize" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">summarize</span><span class="p">(</span><span class="n">input_sequences</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Summarizes the input text</p>
+<h4 id="src.recomend.summarize--parameters">Parameters</h4>
+
+<details class="input_sequences-" open>
+  <summary>str</summary>
+  <p>The input text to be summarized</p>
+</details>      <h4 id="src.recomend.summarize--returns">Returns</h4>
+<p>str
+    summarized text</p>
+
+      <details class="quote">
+        <summary>Source code in <code>src/recomend.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">input_sequences</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summarizes the input text</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_sequences : str</span>
+<span class="sd">        The input text to be summarized</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        summarized text</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+    <span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;UrukHan/t5-russian-summarization&quot;</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">T5TokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">MODEL_NAME</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">MODEL_NAME</span><span class="p">)</span>
+
+    <span class="n">task_prefix</span> <span class="o">=</span> <span class="s2">&quot;Summarize: &quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">input_sequences</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">input_sequences</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_sequences</span><span class="p">]</span>
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">task_prefix</span> <span class="o">+</span> <span class="n">sequence</span> <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">input_sequences</span><span class="p">],</span>
+        <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;longest&quot;</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+        <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">predicts</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">encoded</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">predicts</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">summary</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
 
 
   </div>
@@ -366,10 +805,10 @@ Parameters</p>
 
 <a id="src.utils"></a>
   <div class="doc doc-contents first">
-
+  
       <p>Utils.</p>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -385,43 +824,28 @@ Parameters</p>
 
 
 
-<h2 id="src.utils.get_coo_matrix" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_coo_matrix</span><span class="p">(</span><span class="n">intercations</span><span class="p">,</span> <span class="n">user_col</span><span class="o">=</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="n">item_col</span><span class="o">=</span><span class="s1">&#39;item_id&#39;</span><span class="p">,</span> <span class="n">weight_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<h2 id="src.utils.create_weighted_interaction_matrix" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_weighted_interaction_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span></code>
 
 </h2>
 
 
   <div class="doc doc-contents ">
-
-      <p>Create a COO sparse matrix from a pandas DataFrame.</p>
-<h4 id="src.utils.get_coo_matrix--parameters">Parameters</h4>
+  
+      <p>Create a weighted interaction matrix based on the input DataFrame.</p>
+<h4 id="src.utils.create_weighted_interaction_matrix--parameters">Parameters</h4>
 
 <details class="df-" open>
   <summary>pd.DataFrame</summary>
-  <p>DataFrame containing the user-item interactions.</p>
+  <p>The input DataFrame containing interactions between users and items.</p>
 </details>
-<details class="user_col-" open>
-  <summary>str, optional</summary>
-  <p>Name of the user ID column in <code>df</code>, by default 'user_id'.</p>
-</details>
-<details class="item_col-" open>
-  <summary>str, optional</summary>
-  <p>Name of the item ID column in <code>df</code>, by default 'item_id'.</p>
-</details>
-<details class="weight_col-" open>
-  <summary>str, optional</summary>
-  <p>Name of the weight column in <code>df</code>, by default None.</p>
-</details>
-<details class="users_mapping-" open>
-  <summary>dict, optional</summary>
-  <p>A mapping from user IDs to row indices in the resulting matrix, by default None.</p>
-</details>
-<details class="items_mapping-" open>
-  <summary>dict, optional</summary>
-  <p>A mapping from item IDs to column indices in the resulting matrix, by default None.</p>
-</details>      <h4 id="src.utils.get_coo_matrix--returns">Returns</h4>
-<p>sp.coo_matrix
-    A sparse COO matrix representing the user-item interactions.</p>
+<details class="alpha-" open>
+  <summary>float, optional</summary>
+  <p>A hyperparameter used to weight interactions based on recency. Default is 0.01.</p>
+</details>      <h4 id="src.utils.create_weighted_interaction_matrix--returns">Returns</h4>
+<p>Tuple[pd.DataFrame, sp.coo_matrix]
+    The input DataFrame with added columns for days since interaction, weight, and target, and a sparse matrix
+    representing the weighted interactions.</p>
 
       <details class="quote">
         <summary>Source code in <code>src/utils.py</code></summary>
@@ -454,169 +878,36 @@ Parameters</p>
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span>
-<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_coo_matrix</span><span class="p">(</span>
-    <span class="n">intercations</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">user_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
-    <span class="n">item_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;item_id&quot;</span><span class="p">,</span>
-    <span class="n">weight_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">users_mapping</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">items_mapping</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sp</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a COO sparse matrix from a pandas DataFrame.</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_weighted_interaction_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a weighted interaction matrix based on the input DataFrame.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    df : pd.DataFrame</span>
-<span class="sd">        DataFrame containing the user-item interactions.</span>
-<span class="sd">    user_col : str, optional</span>
-<span class="sd">        Name of the user ID column in `df`, by default &#39;user_id&#39;.</span>
-<span class="sd">    item_col : str, optional</span>
-<span class="sd">        Name of the item ID column in `df`, by default &#39;item_id&#39;.</span>
-<span class="sd">    weight_col : str, optional</span>
-<span class="sd">        Name of the weight column in `df`, by default None.</span>
-<span class="sd">    users_mapping : dict, optional</span>
-<span class="sd">        A mapping from user IDs to row indices in the resulting matrix, by default None.</span>
-<span class="sd">    items_mapping : dict, optional</span>
-<span class="sd">        A mapping from item IDs to column indices in the resulting matrix, by default None.</span>
+<span class="sd">        The input DataFrame containing interactions between users and items.</span>
+<span class="sd">    alpha : float, optional</span>
+<span class="sd">        A hyperparameter used to weight interactions based on recency. Default is 0.01.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    sp.coo_matrix</span>
-<span class="sd">        A sparse COO matrix representing the user-item interactions.</span>
+<span class="sd">    Tuple[pd.DataFrame, sp.coo_matrix]</span>
+<span class="sd">        The input DataFrame with added columns for days since interaction, weight, and target, and a sparse matrix</span>
+<span class="sd">        representing the weighted interactions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">weight_col</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intercations</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="n">intercations</span><span class="p">[</span><span class="n">weight_col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-    <span class="n">interaction_matrix</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;rating&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;progress&quot;</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">interactions_sparse</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span>
         <span class="p">(</span>
-            <span class="n">weights</span><span class="p">,</span>
-            <span class="p">(</span>
-                <span class="n">intercations</span><span class="p">[</span><span class="n">user_col</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">users_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">),</span>
-                <span class="n">intercations</span><span class="p">[</span><span class="n">item_col</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">items_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">),</span>
-            <span class="p">),</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;item_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
         <span class="p">),</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">interaction_matrix</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="src.utils.get_mapping" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_mapping</span><span class="p">(</span><span class="n">intercations</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Returns two mappings for user and item IDs to integer indices.</p>
-<h4 id="src.utils.get_mapping--parameters">Parameters</h4>
-
-<details class="df-" open>
-  <summary>pandas.DataFrame</summary>
-  <p>The input DataFrame containing user and item IDs.</p>
-</details>      <h4 id="src.utils.get_mapping--returns">Returns</h4>
-<p>tuple of two dictionaries
-    The first dictionary maps user IDs to integer indices, and the second
-    dictionary maps item IDs to integer indices.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_mapping</span><span class="p">(</span><span class="n">intercations</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns two mappings for user and item IDs to integer indices.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    df : pandas.DataFrame</span>
-<span class="sd">        The input DataFrame containing user and item IDs.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    tuple of two dictionaries</span>
-<span class="sd">        The first dictionary maps user IDs to integer indices, and the second</span>
-<span class="sd">        dictionary maps item IDs to integer indices.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">users_inv_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">intercations</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
-    <span class="n">users_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">users_inv_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-
-    <span class="n">items_inv_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">intercations</span><span class="p">[</span><span class="s2">&quot;item_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
-    <span class="n">items_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items_inv_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-
-    <span class="k">return</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="src.utils.get_user_loggins" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_user_loggins</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Extracts unique user IDs from the given data.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_user_loggins</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts unique user IDs from the given data.&quot;&quot;&quot;</span>
-    <span class="n">users</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">users</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">interactions_sparse</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -634,7 +925,7 @@ Parameters</p>
 
 
   <div class="doc doc-contents ">
-
+  
       <p>Reads data from csv files located at given path.</p>
 <h4 id="src.utils.read_data--parameters">Parameters</h4>
 
@@ -748,7 +1039,7 @@ Parameters</p>
 <a id="src.validation"></a>
   <div class="doc doc-contents first">
 
-
+  
 
   <div class="doc doc-children">
 
@@ -759,44 +1050,57 @@ Parameters</p>
 
 
 
-<div class="doc doc-object doc-class">
+
+<div class="doc doc-object doc-function">
 
 
 
-<h2 id="src.validation.TimeRangeSplit" class="doc doc-heading">
-        <code>TimeRangeSplit</code>
-
+<h2 id="src.validation.fit_implicit_als" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">fit_implicit_als</span><span class="p">(</span><span class="n">train_sparse</span><span class="p">,</span> <span class="n">test_sparse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fold</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 </h2>
 
 
   <div class="doc doc-contents ">
+  
+      <p>Fits an implicit ALS model using the given training sparse matrix.
+Optionally evaluates the model using the given test sparse matrix and logs the results to Weights &amp; Biases.
+If no test sparse matrix is given, the trained model is pickled and saved to disk.</p>
+<h4 id="src.validation.fit_implicit_als--parameters">Parameters</h4>
 
+<details class="train_sparse-" open>
+  <summary>scipy.sparse.csr_matrix</summary>
+  <p>The training sparse matrix.</p>
+</details>
+<details class="test_sparse-" open>
+  <summary>scipy.sparse.csr_matrix, optional</summary>
+  <p>The test sparse matrix.</p>
+</details>
+<details class="iterations-" open>
+  <summary>int, optional</summary>
+  <p>The number of iterations to run the ALS algorithm. Default is 15.</p>
+</details>
+<details class="factors-" open>
+  <summary>int, optional</summary>
+  <p>The number of latent factors to use in the model. Default is 20.</p>
+</details>
+<details class="regularization-" open>
+  <summary>float, optional</summary>
+  <p>The regularization parameter to use in the ALS algorithm. Default is 0.1.</p>
+</details>
+<details class="alpha-" open>
+  <summary>int, optional</summary>
+  <p>The alpha hyperparameter to use in the confidence matrix of the ALS algorithm. Default is 40.</p>
+</details>
+<details class="log_wandb-" open>
+  <summary>bool, optional</summary>
+  <p>Whether to log the results to Weights &amp; Biases. Default is True.</p>
+</details>      <h4 id="src.validation.fit_implicit_als--returns">Returns</h4>
+<p>None</p>
 
-      <p>From https://www.kaggle.com/code/sharthz23/implicit-lightfm.</p>
-
-
-        <details class="quote">
-          <summary>Source code in <code>src/validation.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
+      <details class="quote">
+        <summary>Source code in <code>src/validation.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 35</span>
 <span class="normal"> 36</span>
 <span class="normal"> 37</span>
 <span class="normal"> 38</span>
@@ -867,10 +1171,118 @@ Parameters</p>
 <span class="normal">103</span>
 <span class="normal">104</span>
 <span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fit_implicit_als</span><span class="p">(</span>
+    <span class="n">train_sparse</span><span class="p">,</span>
+    <span class="n">test_sparse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">iterations</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">factors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">regularization</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+    <span class="n">fold</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fits an implicit ALS model using the given training sparse matrix.</span>
+<span class="sd">    Optionally evaluates the model using the given test sparse matrix and logs the results to Weights &amp; Biases.</span>
+<span class="sd">    If no test sparse matrix is given, the trained model is pickled and saved to disk.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    train_sparse : scipy.sparse.csr_matrix</span>
+<span class="sd">        The training sparse matrix.</span>
+<span class="sd">    test_sparse : scipy.sparse.csr_matrix, optional</span>
+<span class="sd">        The test sparse matrix.</span>
+<span class="sd">    iterations : int, optional</span>
+<span class="sd">        The number of iterations to run the ALS algorithm. Default is 15.</span>
+<span class="sd">    factors : int, optional</span>
+<span class="sd">        The number of latent factors to use in the model. Default is 20.</span>
+<span class="sd">    regularization : float, optional</span>
+<span class="sd">        The regularization parameter to use in the ALS algorithm. Default is 0.1.</span>
+<span class="sd">    alpha : int, optional</span>
+<span class="sd">        The alpha hyperparameter to use in the confidence matrix of the ALS algorithm. Default is 40.</span>
+<span class="sd">    log_wandb : bool, optional</span>
+<span class="sd">        Whether to log the results to Weights &amp; Biases. Default is True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;factors&quot;</span><span class="p">:</span> <span class="n">factors</span><span class="p">,</span>
+        <span class="s2">&quot;regularization&quot;</span><span class="p">:</span> <span class="n">regularization</span><span class="p">,</span>
+        <span class="s2">&quot;iterations&quot;</span><span class="p">:</span> <span class="n">iterations</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">AlternatingLeastSquares</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="n">run</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MFDP&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ALS&quot;</span><span class="p">)</span>
+    <span class="n">wandb</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_sparse</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">test_sparse</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+            <span class="n">metrics</span> <span class="o">=</span> <span class="n">ranking_metrics_at_k</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span>
+                <span class="n">train_sparse</span><span class="p">,</span>
+                <span class="n">test_sparse</span><span class="p">,</span>
+                <span class="n">K</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+                <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;fold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fold</span>
+            <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/als.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="n">artifact</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;als-model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;pickle&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">artifact</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/als.pickle&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">,</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
+        <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.validation.fit_implicit_bm25" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">fit_implicit_bm25</span><span class="p">(</span><span class="n">train_sparse</span><span class="p">,</span> <span class="n">test_sparse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fold</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Fits an implicit ALS model using the given training sparse matrix.
+Optionally evaluates the model using the given test sparse matrix and logs the results to Weights &amp; Biases.
+If no test sparse matrix is given, the trained model is pickled and saved to disk.</p>
+<h4 id="src.validation.fit_implicit_bm25--parameters">Parameters</h4>
+
+<details class="train_sparse-" open>
+  <summary>scipy.sparse.csr_matrix</summary>
+  <p>The training sparse matrix.</p>
+</details>
+<details class="test_sparse-" open>
+  <summary>scipy.sparse.csr_matrix, optional</summary>
+  <p>The test sparse matrix.</p>
+</details>
+<details class="log_wandb-" open>
+  <summary>bool, optional</summary>
+  <p>Whether to log the results to Weights &amp; Biases. Default is True.</p>
+</details>      <h4 id="src.validation.fit_implicit_bm25--returns">Returns</h4>
+<p>None</p>
+
+      <details class="quote">
+        <summary>Source code in <code>src/validation.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
@@ -909,170 +1321,112 @@ Parameters</p>
 <span class="normal">145</span>
 <span class="normal">146</span>
 <span class="normal">147</span>
-<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">TimeRangeSplit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;From https://www.kaggle.com/code/sharthz23/implicit-lightfm.&quot;&quot;&quot;</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fit_implicit_bm25</span><span class="p">(</span>
+    <span class="n">train_sparse</span><span class="p">,</span>
+    <span class="n">test_sparse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">fold</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fits an implicit ALS model using the given training sparse matrix.</span>
+<span class="sd">    Optionally evaluates the model using the given test sparse matrix and logs the results to Weights &amp; Biases.</span>
+<span class="sd">    If no test sparse matrix is given, the trained model is pickled and saved to disk.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">start_date</span><span class="p">,</span>
-        <span class="n">end_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span>
-        <span class="n">periods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">closed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">train_min_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">filter_cold_users</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">filter_cold_items</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">filter_already_seen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize TimeRangeSplit.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start_date</span> <span class="o">=</span> <span class="n">start_date</span>
-        <span class="k">if</span> <span class="n">end_date</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">periods</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Either &#39;end_date&#39; or &#39;periods&#39; must be non-zero, not both at the same time.&quot;</span><span class="p">,</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    train_sparse : scipy.sparse.csr_matrix</span>
+<span class="sd">        The training sparse matrix.</span>
+<span class="sd">    test_sparse : scipy.sparse.csr_matrix, optional</span>
+<span class="sd">        The test sparse matrix.</span>
+<span class="sd">    log_wandb : bool, optional</span>
+<span class="sd">        Whether to log the results to Weights &amp; Biases. Default is True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">run</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MFDP&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BM25&quot;</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BM25Recommender</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_sparse</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">test_sparse</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+            <span class="n">metrics</span> <span class="o">=</span> <span class="n">ranking_metrics_at_k</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span>
+                <span class="n">train_sparse</span><span class="p">,</span>
+                <span class="n">test_sparse</span><span class="p">,</span>
+                <span class="n">K</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+                <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="p">)</span>
+            <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;fold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fold</span>
+            <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/bm25.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">end_date</span> <span class="o">=</span> <span class="n">end_date</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">periods</span> <span class="o">=</span> <span class="n">periods</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tz</span> <span class="o">=</span> <span class="n">tz</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">closed</span> <span class="o">=</span> <span class="n">closed</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">train_min_date</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_users</span> <span class="o">=</span> <span class="n">filter_cold_users</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_items</span> <span class="o">=</span> <span class="n">filter_cold_items</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">filter_already_seen</span> <span class="o">=</span> <span class="n">filter_already_seen</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
-            <span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
-            <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-            <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span>
-            <span class="n">periods</span><span class="o">=</span><span class="n">periods</span><span class="p">,</span>
-            <span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">,</span>
-            <span class="n">normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">,</span>
-            <span class="n">closed</span><span class="o">=</span><span class="n">closed</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_n_splits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_n_splits</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Provided parametrs set an empty date range.&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">df</span><span class="p">,</span>
-        <span class="n">user_column</span><span class="o">=</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
-        <span class="n">item_column</span><span class="o">=</span><span class="s2">&quot;item_id&quot;</span><span class="p">,</span>
-        <span class="n">datetime_column</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span>
-        <span class="n">fold_stats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Split the dataset into training and test sets.&quot;&quot;&quot;</span>
-        <span class="n">df_datetime</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">datetime_column</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">train_min_mask</span> <span class="o">=</span> <span class="n">df_datetime</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">train_min_mask</span> <span class="o">=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>
-
-        <span class="n">date_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date_range</span><span class="p">[</span>
-            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&gt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-            <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&lt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-        <span class="p">]</span>
-
-        <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">pairwise</span><span class="p">(</span><span class="n">date_range</span><span class="p">):</span>
-            <span class="n">fold_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Start date&quot;</span><span class="p">:</span> <span class="n">start</span><span class="p">,</span> <span class="s2">&quot;End date&quot;</span><span class="p">:</span> <span class="n">end</span><span class="p">}</span>
-            <span class="n">train_mask</span> <span class="o">=</span> <span class="n">train_min_mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_datetime</span> <span class="o">&lt;</span> <span class="n">start</span><span class="p">)</span>
-            <span class="n">train_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">train_mask</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;Train&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span>
-
-            <span class="n">test_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_datetime</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_datetime</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span>
-            <span class="n">test_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">test_mask</span><span class="p">]</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_users</span><span class="p">:</span>
-                <span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span>
-                    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">user_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-                    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">user_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-                <span class="p">)</span>
-                <span class="n">new_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">test_mask</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="n">user_column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">new</span><span class="p">)]</span>
-                <span class="n">test_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">new_idx</span><span class="p">)</span>
-                <span class="n">test_mask</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                    <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New users&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-                    <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New users interactions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_idx</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_items</span><span class="p">:</span>
-                <span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span>
-                    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">item_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-                    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">item_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-                <span class="p">)</span>
-                <span class="n">new_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">test_mask</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="n">item_column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">new</span><span class="p">)]</span>
-                <span class="n">test_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">new_idx</span><span class="p">)</span>
-                <span class="n">test_mask</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                    <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New items&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-                    <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New items interactions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_idx</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_already_seen</span><span class="p">:</span>
-                <span class="n">user_item</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_column</span><span class="p">,</span> <span class="n">item_column</span><span class="p">]</span>
-                <span class="n">train_pairs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span>
-                                     <span class="n">user_item</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">user_item</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
-                <span class="n">test_pairs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">user_item</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span>
-                    <span class="n">user_item</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
-                <span class="n">intersection</span> <span class="o">=</span> <span class="n">train_pairs</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">test_pairs</span><span class="p">)</span>
-                <span class="n">test_idx</span> <span class="o">=</span> <span class="n">test_idx</span><span class="p">[</span><span class="o">~</span><span class="n">test_pairs</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">intersection</span><span class="p">)]</span>
-                <span class="c1"># test_mask = rd.df.index.isin(test_idx)</span>
-                <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                    <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;Known interactions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;Test&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span>
-
-            <span class="k">yield</span> <span class="p">(</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">fold_info</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">get_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">datetime_column</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get n splits.&quot;&quot;&quot;</span>
-        <span class="n">df_datetime</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">datetime_column</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">df_datetime</span> <span class="o">=</span> <span class="n">df_datetime</span><span class="p">[</span><span class="n">df_datetime</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span><span class="p">]</span>
-
-        <span class="n">date_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date_range</span><span class="p">[</span>
-            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&gt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-            <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&lt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-        <span class="p">]</span>
-
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">date_range</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">artifact</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;bm25-model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;pickle&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">artifact</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/bm25.pickle&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">,</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
+        <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+      </details>
+  </div>
 
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
+</div>
 
 <div class="doc doc-object doc-function">
 
 
 
-<h3 id="src.validation.TimeRangeSplit.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">train_min_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filter_cold_users</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filter_cold_items</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filter_already_seen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<h2 id="src.validation.split_train_test_users" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">split_train_test_users</span><span class="p">(</span><span class="n">interactions</span><span class="p">,</span> <span class="n">num_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span></code>
 
-</h3>
+</h2>
 
 
   <div class="doc doc-contents ">
+  
+      <p>Splits the interactions dataframe into train and test sets by unique users using k-fold cross-validation.</p>
+<h4 id="src.validation.split_train_test_users--parameters">Parameters</h4>
 
-      <p>Initialize TimeRangeSplit.</p>
+<details class="interactions-" open>
+  <summary>pandas.DataFrame</summary>
+  <p>The interactions dataframe.</p>
+</details>
+<details class="num_folds-" open>
+  <summary>int, optional</summary>
+  <p>The number of folds for k-fold cross-validation. Default is 5.</p>
+</details>      <h4 id="src.validation.split_train_test_users--yields">Yields</h4>
+<p>tuple
+    A tuple of pandas.DataFrames containing the train and test sets, respectively.</p>
 
       <details class="quote">
         <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -1084,955 +1438,26 @@ Parameters</p>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">start_date</span><span class="p">,</span>
-    <span class="n">end_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span>
-    <span class="n">periods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">closed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">train_min_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">filter_cold_users</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">filter_cold_items</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">filter_already_seen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize TimeRangeSplit.&quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">start_date</span> <span class="o">=</span> <span class="n">start_date</span>
-    <span class="k">if</span> <span class="n">end_date</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">periods</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Either &#39;end_date&#39; or &#39;periods&#39; must be non-zero, not both at the same time.&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">end_date</span> <span class="o">=</span> <span class="n">end_date</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">periods</span> <span class="o">=</span> <span class="n">periods</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">tz</span> <span class="o">=</span> <span class="n">tz</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">closed</span> <span class="o">=</span> <span class="n">closed</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">train_min_date</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_users</span> <span class="o">=</span> <span class="n">filter_cold_users</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_items</span> <span class="o">=</span> <span class="n">filter_cold_items</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">filter_already_seen</span> <span class="o">=</span> <span class="n">filter_already_seen</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
-        <span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
-        <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-        <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span>
-        <span class="n">periods</span><span class="o">=</span><span class="n">periods</span><span class="p">,</span>
-        <span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">,</span>
-        <span class="n">normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">,</span>
-        <span class="n">closed</span><span class="o">=</span><span class="n">closed</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">max_n_splits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_n_splits</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Provided parametrs set an empty date range.&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h3 id="src.validation.TimeRangeSplit.get_n_splits" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_n_splits</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">datetime_column</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span></code>
-
-</h3>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Get n splits.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_n_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">datetime_column</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get n splits.&quot;&quot;&quot;</span>
-    <span class="n">df_datetime</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">datetime_column</span><span class="p">]</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">df_datetime</span> <span class="o">=</span> <span class="n">df_datetime</span><span class="p">[</span><span class="n">df_datetime</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span><span class="p">]</span>
-
-    <span class="n">date_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date_range</span><span class="p">[</span>
-        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&gt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&lt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-    <span class="p">]</span>
-
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">date_range</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h3 id="src.validation.TimeRangeSplit.split" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">user_column</span><span class="o">=</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="n">item_column</span><span class="o">=</span><span class="s1">&#39;item_id&#39;</span><span class="p">,</span> <span class="n">datetime_column</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">fold_stats</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-</h3>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Split the dataset into training and test sets.</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">split</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">df</span><span class="p">,</span>
-    <span class="n">user_column</span><span class="o">=</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
-    <span class="n">item_column</span><span class="o">=</span><span class="s2">&quot;item_id&quot;</span><span class="p">,</span>
-    <span class="n">datetime_column</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span>
-    <span class="n">fold_stats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split the dataset into training and test sets.&quot;&quot;&quot;</span>
-    <span class="n">df_datetime</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">datetime_column</span><span class="p">]</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">train_min_mask</span> <span class="o">=</span> <span class="n">df_datetime</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_min_date</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">train_min_mask</span> <span class="o">=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>
-
-    <span class="n">date_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date_range</span><span class="p">[</span>
-        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&gt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date_range</span> <span class="o">&lt;=</span> <span class="n">df_datetime</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-    <span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">pairwise</span><span class="p">(</span><span class="n">date_range</span><span class="p">):</span>
-        <span class="n">fold_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Start date&quot;</span><span class="p">:</span> <span class="n">start</span><span class="p">,</span> <span class="s2">&quot;End date&quot;</span><span class="p">:</span> <span class="n">end</span><span class="p">}</span>
-        <span class="n">train_mask</span> <span class="o">=</span> <span class="n">train_min_mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_datetime</span> <span class="o">&lt;</span> <span class="n">start</span><span class="p">)</span>
-        <span class="n">train_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">train_mask</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-            <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;Train&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span>
-
-        <span class="n">test_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_datetime</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_datetime</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span>
-        <span class="n">test_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">test_mask</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_users</span><span class="p">:</span>
-            <span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">user_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">user_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">new_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">test_mask</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="n">user_column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">new</span><span class="p">)]</span>
-            <span class="n">test_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">new_idx</span><span class="p">)</span>
-            <span class="n">test_mask</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New users&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New users interactions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_idx</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_cold_items</span><span class="p">:</span>
-            <span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">item_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">item_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">new_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">test_mask</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="n">item_column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">new</span><span class="p">)]</span>
-            <span class="n">test_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">new_idx</span><span class="p">)</span>
-            <span class="n">test_mask</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New items&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;New items interactions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_idx</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_already_seen</span><span class="p">:</span>
-            <span class="n">user_item</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_column</span><span class="p">,</span> <span class="n">item_column</span><span class="p">]</span>
-            <span class="n">train_pairs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span>
-                                 <span class="n">user_item</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">user_item</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
-            <span class="n">test_pairs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="n">user_item</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span>
-                <span class="n">user_item</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
-            <span class="n">intersection</span> <span class="o">=</span> <span class="n">train_pairs</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">test_pairs</span><span class="p">)</span>
-            <span class="n">test_idx</span> <span class="o">=</span> <span class="n">test_idx</span><span class="p">[</span><span class="o">~</span><span class="n">test_pairs</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">intersection</span><span class="p">)]</span>
-            <span class="c1"># test_mask = rd.df.index.isin(test_idx)</span>
-            <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-                <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;Known interactions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">fold_stats</span><span class="p">:</span>
-            <span class="n">fold_info</span><span class="p">[</span><span class="s2">&quot;Test&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span>
-
-        <span class="k">yield</span> <span class="p">(</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">fold_info</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-
-
-  </div>
-
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="src.validation.validation_als" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">validation_als</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Perform k-fold cross-validation on the ALS model.</p>
-<h4 id="src.validation.validation_als--parameters">Parameters</h4>
-
-<details class="folds_with_stats-" open>
-  <summary>list</summary>
-  <p>A list of (train_idx, test_idx, stats) tuples, where train_idx and test_idx
-are the indices of the training and test sets, respectively, and stats is a
-dictionary containing statistics about the fold.</p>
-</details>
-<details class="df-" open>
-  <summary>pandas.DataFrame</summary>
-  <p>The interaction matrix, with columns "user_id", "item_id", and "weight".</p>
-</details>      <h4 id="src.validation.validation_als--returns">Returns</h4>
-<p>None</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">validation_als</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">):</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">split_train_test_users</span><span class="p">(</span><span class="n">interactions</span><span class="p">,</span> <span class="n">num_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Perform k-fold cross-validation on the ALS model.</span>
+<span class="sd">    Splits the interactions dataframe into train and test sets by unique users using k-fold cross-validation.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    folds_with_stats : list</span>
-<span class="sd">        A list of (train_idx, test_idx, stats) tuples, where train_idx and test_idx</span>
-<span class="sd">        are the indices of the training and test sets, respectively, and stats is a</span>
-<span class="sd">        dictionary containing statistics about the fold.</span>
-<span class="sd">    df : pandas.DataFrame</span>
-<span class="sd">        The interaction matrix, with columns &quot;user_id&quot;, &quot;item_id&quot;, and &quot;weight&quot;.</span>
+<span class="sd">    interactions : pandas.DataFrame</span>
+<span class="sd">        The interactions dataframe.</span>
+<span class="sd">    num_folds : int, optional</span>
+<span class="sd">        The number of folds for k-fold cross-validation. Default is 5.</span>
 
-<span class="sd">    Returns</span>
+<span class="sd">    Yields</span>
 <span class="sd">    -------</span>
-<span class="sd">    None</span>
+<span class="sd">    tuple</span>
+<span class="sd">        A tuple of pandas.DataFrames containing the train and test sets, respectively.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MFDP&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ALS&quot;</span><span class="p">)</span>
-
-    <span class="n">run_no</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">folds_with_stats</span><span class="p">:</span>
-        <span class="n">run_no</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">]</span>
-        <span class="n">test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
-
-        <span class="n">train_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">train</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">test_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">test</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">model</span> <span class="o">=</span> <span class="n">AlternatingLeastSquares</span><span class="p">(</span><span class="n">factors</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="n">metrics</span> <span class="o">=</span> <span class="n">ranking_metrics_at_k</span><span class="p">(</span>
-            <span class="n">model</span><span class="p">,</span> <span class="n">train_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">test_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;fold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_no</span>
-
-        <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
-
-    <span class="n">data_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-        <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-    <span class="n">model</span> <span class="o">=</span> <span class="n">AlternatingLeastSquares</span><span class="p">(</span><span class="n">factors</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/als.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-
-    <span class="n">artifact</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">artifact</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/als.pickle&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="src.validation.validation_bm25" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">validation_bm25</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Validate TF-IDF recommender using k-fold cross-validation and log results to WandB.</p>
-<h4 id="src.validation.validation_bm25--parameters">Parameters</h4>
-
-<details class="folds_with_stats-" open>
-  <summary>list</summary>
-  <p>List of tuples containing train and test indices and fold statistics.</p>
-</details>
-<details class="df-" open>
-  <summary>pd.DataFrame</summary>
-  <p>Input dataframe containing user-item interaction data.</p>
-</details>
-<details class="users_mapping-" open>
-  <summary>dict</summary>
-  <p>Dictionary mapping user IDs to integer indices.</p>
-</details>
-<details class="items_mapping-" open>
-  <summary>dict</summary>
-  <p>Dictionary mapping item IDs to integer indices.</p>
-</details>      <h4 id="src.validation.validation_bm25--returns">Returns</h4>
-<p>None</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
-<span class="normal">349</span>
-<span class="normal">350</span>
-<span class="normal">351</span>
-<span class="normal">352</span>
-<span class="normal">353</span>
-<span class="normal">354</span>
-<span class="normal">355</span>
-<span class="normal">356</span>
-<span class="normal">357</span>
-<span class="normal">358</span>
-<span class="normal">359</span>
-<span class="normal">360</span>
-<span class="normal">361</span>
-<span class="normal">362</span>
-<span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">validation_bm25</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Validate TF-IDF recommender using k-fold cross-validation and log results to WandB.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    folds_with_stats : list</span>
-<span class="sd">        List of tuples containing train and test indices and fold statistics.</span>
-<span class="sd">    df : pd.DataFrame</span>
-<span class="sd">        Input dataframe containing user-item interaction data.</span>
-<span class="sd">    users_mapping : dict</span>
-<span class="sd">        Dictionary mapping user IDs to integer indices.</span>
-<span class="sd">    items_mapping : dict</span>
-<span class="sd">        Dictionary mapping item IDs to integer indices.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MFDP&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BM25&quot;</span><span class="p">)</span>
-
-    <span class="n">run_no</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">folds_with_stats</span><span class="p">:</span>
-        <span class="n">run_no</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">]</span>
-        <span class="n">test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
-
-        <span class="n">train_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">train</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">test_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">test</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">model</span> <span class="o">=</span> <span class="n">BM25Recommender</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_mat</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="n">metrics</span> <span class="o">=</span> <span class="n">ranking_metrics_at_k</span><span class="p">(</span>
-            <span class="n">model</span><span class="p">,</span> <span class="n">train_mat</span><span class="p">,</span> <span class="n">test_mat</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;fold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_no</span>
-
-        <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
-
-    <span class="n">data_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-        <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-    <span class="n">model</span> <span class="o">=</span> <span class="n">BM25Recommender</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_mat</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/bm25.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-
-    <span class="n">artifact</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">artifact</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/bm25.pickle&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="src.validation.validation_bpr" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">validation_bpr</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Run k-fold cross-validation for Bayesian Personalized Ranking (BPR).</p>
-<p>For each fold, fit a BPR model on the training set, and evaluate it on
-the test set using ranking metrics@k. The metrics are printed to the
-console.</p>
-<h4 id="src.validation.validation_bpr--parameters">Parameters</h4>
-
-<details class="folds_with_stats-" open>
-  <summary>list of tuple of 3 arrays</summary>
-  <p>A list of folds, where each fold is represented as a tuple of 3 arrays:
-the training indices, test indices, and a dictionary of fold statistics.</p>
-</details>
-<details class="df-" open>
-  <summary>pandas.DataFrame</summary>
-  <p>The input DataFrame containing the user-item interactions.</p>
-</details>      <h4 id="src.validation.validation_bpr--returns">Returns</h4>
-<p>None</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">validation_bpr</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run k-fold cross-validation for Bayesian Personalized Ranking (BPR).</span>
-
-<span class="sd">    For each fold, fit a BPR model on the training set, and evaluate it on</span>
-<span class="sd">    the test set using ranking metrics@k. The metrics are printed to the</span>
-<span class="sd">    console.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    folds_with_stats : list of tuple of 3 arrays</span>
-<span class="sd">        A list of folds, where each fold is represented as a tuple of 3 arrays:</span>
-<span class="sd">        the training indices, test indices, and a dictionary of fold statistics.</span>
-<span class="sd">    df : pandas.DataFrame</span>
-<span class="sd">        The input DataFrame containing the user-item interactions.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MFDP&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BPR&quot;</span><span class="p">)</span>
-
-    <span class="n">run_no</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">folds_with_stats</span><span class="p">:</span>
-        <span class="n">run_no</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">]</span>
-        <span class="n">test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
-
-        <span class="n">train_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">train</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">test_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">test</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">model</span> <span class="o">=</span> <span class="n">BayesianPersonalizedRanking</span><span class="p">(</span><span class="n">factors</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="n">metrics</span> <span class="o">=</span> <span class="n">ranking_metrics_at_k</span><span class="p">(</span>
-            <span class="n">model</span><span class="p">,</span> <span class="n">train_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">test_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;fold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_no</span>
-
-        <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
-
-    <span class="n">data_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-        <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-    <span class="n">model</span> <span class="o">=</span> <span class="n">BayesianPersonalizedRanking</span><span class="p">(</span><span class="n">factors</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/bpr.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-
-    <span class="n">artifact</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">artifact</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/bpr.pickle&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="src.validation.validation_tfidf" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">validation_tfidf</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-
-      <p>Train and evaluate a TF-IDF recommender on cross-validation folds.</p>
-<h4 id="src.validation.validation_tfidf--parameters">Parameters</h4>
-
-<details class="folds_with_stats-" open>
-  <summary>List[Tuple[np.ndarray, np.ndarray, Dict[str, Any]]]</summary>
-  <p>List of tuples where each tuple contains train indices, test indices, and some
-stats about the fold.</p>
-</details>
-<details class="df-" open>
-  <summary>pd.DataFrame</summary>
-  <p>The ratings dataframe.</p>
-</details>
-<details class="users_mapping-" open>
-  <summary>Dict</summary>
-  <p>Mapping from user ids to integers.</p>
-</details>
-<details class="items_mapping-" open>
-  <summary>Dict</summary>
-  <p>Mapping from item ids to integers.</p>
-</details>      <h4 id="src.validation.validation_tfidf--returns">Returns</h4>
-<p>None</p>
-
-      <details class="quote">
-        <summary>Source code in <code>src/validation.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">validation_tfidf</span><span class="p">(</span><span class="n">folds_with_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Train and evaluate a TF-IDF recommender on cross-validation folds.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    folds_with_stats : List[Tuple[np.ndarray, np.ndarray, Dict[str, Any]]]</span>
-<span class="sd">        List of tuples where each tuple contains train indices, test indices, and some</span>
-<span class="sd">        stats about the fold.</span>
-<span class="sd">    df : pd.DataFrame</span>
-<span class="sd">        The ratings dataframe.</span>
-<span class="sd">    users_mapping : Dict</span>
-<span class="sd">        Mapping from user ids to integers.</span>
-<span class="sd">    items_mapping : Dict</span>
-<span class="sd">        Mapping from item ids to integers.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MFDP&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TF-IDF&quot;</span><span class="p">)</span>
-
-    <span class="n">run_no</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">folds_with_stats</span><span class="p">:</span>
-        <span class="n">run_no</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">]</span>
-        <span class="n">test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
-
-        <span class="n">train_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">train</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">test_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-            <span class="n">test</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-        <span class="n">model</span> <span class="o">=</span> <span class="n">TFIDFRecommender</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_mat</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="n">metrics</span> <span class="o">=</span> <span class="n">ranking_metrics_at_k</span><span class="p">(</span>
-            <span class="n">model</span><span class="p">,</span> <span class="n">train_mat</span><span class="p">,</span> <span class="n">test_mat</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;fold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_no</span>
-
-        <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
-
-    <span class="n">data_mat</span> <span class="o">=</span> <span class="n">get_coo_matrix</span><span class="p">(</span>
-        <span class="n">df</span><span class="p">,</span> <span class="n">users_mapping</span><span class="o">=</span><span class="n">users_mapping</span><span class="p">,</span> <span class="n">items_mapping</span><span class="o">=</span><span class="n">items_mapping</span><span class="p">,</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-
-    <span class="n">model</span> <span class="o">=</span> <span class="n">TFIDFRecommender</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_mat</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/tfidf.pickle&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-
-    <span class="n">artifact</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">artifact</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;./model/tfidf.pickle&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
-
-    <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">random_state</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_folds</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sparce_mat</span> <span class="o">=</span> <span class="n">create_weighted_interaction_matrix</span><span class="p">(</span><span class="n">interactions</span><span class="p">)</span>
+        <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">sparce_mat</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2055,7 +1480,7 @@ stats about the fold.</p>
 <a id="app"></a>
   <div class="doc doc-contents first">
 
-
+  
 
   <div class="doc doc-children">
 
@@ -2071,16 +1496,16 @@ stats about the fold.</p>
 
 
 
-<h2 id="app.create_columns_with_data" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">create_columns_with_data</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
+<h2 id="app.create_product_card" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_product_card</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
 
 </h2>
 
 
   <div class="doc doc-contents ">
-
+  
       <p>Creates k columns with data in Streamlit.</p>
-<h4 id="app.create_columns_with_data--parameters">Parameters</h4>
+<h4 id="app.create_product_card--parameters">Parameters</h4>
 
 <details class="st-" open>
   <summary>streamlit</summary>
@@ -2096,16 +1521,7 @@ stats about the fold.</p>
 </details>
       <details class="quote">
         <summary>Source code in <code>app.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
@@ -2136,12 +1552,7 @@ stats about the fold.</p>
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_columns_with_data</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_product_card</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates k columns with data in Streamlit.</span>
 
@@ -2154,7 +1565,10 @@ stats about the fold.</p>
 <span class="sd">    data : list</span>
 <span class="sd">        The list of dictionaries containing the data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># st.error(&quot;The number of data points should be greater than or equal to k.&quot;)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;The number of data points should be greater than or equal to k.&quot;</span><span class="p">)</span>
         <span class="k">return</span>
 
@@ -2165,25 +1579,8 @@ stats about the fold.</p>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_columns</span><span class="p">):</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-        <span class="c1"># Search for a random photo on Unsplash</span>
-        <span class="c1"># photo = api.photo.random()</span>
-
-        <span class="c1"># Get the URL of the photo</span>
-        <span class="c1"># photo_url = photo[0].urls.raw</span>
-
-        <span class="c1"># Download the image</span>
-        <span class="c1"># response = requests.get(photo_url)</span>
-        <span class="c1"># img = Image.open(BytesIO(response.content))</span>
-
-        <span class="c1"># Resize the image to 400x300 pixels</span>
-        <span class="c1"># img = img.resize((200, 300))</span>
-        <span class="c1"># Display the image</span>
-        <span class="c1"># columns[i].image(img, width=200)</span>
-
-        <span class="c1"># Display the title</span>
         <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">**&#39;</span><span class="p">)</span>
 
-        <span class="c1"># Display the author, year, and genres</span>
         <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Автор:** </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;authors&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Год:** </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Жанры:** </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2200,7 +1597,7 @@ stats about the fold.</p>
   </div>
 
 </div><hr />
-
+              
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
@@ -2215,7 +1612,7 @@ stats about the fold.</p>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-
+          
         </div>
       </div>
 
@@ -2225,11 +1622,11 @@ stats about the fold.</p>
 
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
-
-
+    
+    
       <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
-
-
+    
+    
   </span>
 </div>
     <script>var base_url = '..';</script>
