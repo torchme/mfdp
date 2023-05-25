@@ -1,10 +1,7 @@
 import os
 import pickle
 import sys
-from typing import List, Tuple
 
-import numpy as np
-import pandas as pd
 import wandb
 from implicit.als import AlternatingLeastSquares
 from implicit.evaluation import ranking_metrics_at_k, train_test_split
@@ -186,3 +183,4 @@ def main(folds=7, validation=False, algorithm="als"):
 
 if __name__ == "__main__":
     main(folds=3, algorithm="bm25", validation=False)
+    main(folds=3, algorithm="als", validation=False)

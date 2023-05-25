@@ -1,5 +1,5 @@
 import os
-import pickle
+from clearml import StorageManager, Dataset
 import sys
 import requests
 from urllib.parse import urlencode
@@ -8,6 +8,18 @@ from transformers import (
     T5ForConditionalGeneration,
     T5Tokenizer,
 )
+
+
+def log_dataset(url, name):
+    csv_file = StorageManager.get_local_copy(
+        remote_url=url
+    )
+    dataset = Dataset.create(
+        dataset_project="mfdp", dataset_name=name
+    )
+    dataset.add_files(path=csv_file)
+    dataset.upload()
+    dataset.finalize()
 
 
 def download_and_extract_dataset(filename: str):
@@ -31,6 +43,7 @@ def download_and_extract_dataset(filename: str):
         pathfilename = ".src/model/" + filename
     else:
         pathfilename = ".src/data/" + filename
+        log_dataset(url, filename)
 
     final_url = base_url + urlencode(dict(public_key=url))
     response = requests.get(final_url)
@@ -42,7 +55,6 @@ def download_and_extract_dataset(filename: str):
 
 
 def check_upload():
-
     if not os.path.isfile(os.path.join(sys.path[1], "./src/data/interactions.csv")):
         download_and_extract_dataset("interactions.csv")
 

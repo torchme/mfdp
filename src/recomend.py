@@ -75,14 +75,17 @@ def popular_items(
 
 
 def summarize(input_sequences: str):
-    """
-    Суммаризация текста на основе модели T5 LLM.
+    """Summarizes the input text
 
-    Аргументы:
-    text -- str, исходный текст для суммаризации.
+    Parameters
+    ----------
+    input_sequences : str
+        The input text to be summarized
 
-    Возвращает:
-    summary -- str, суммаризованный текст.
+    Returns
+    -------
+    str
+        summarized text
     """
     device = torch.device("cpu")
 
@@ -108,18 +111,25 @@ def summarize(input_sequences: str):
 
 def chat_t5(text, **kwargs):
     """
-    Генерация ответа на основе модели T5 LLM.
+    Initializes the chatbot model and returns the model name.
 
-    Аргументы:
-    text -- str, исходный текст вопроса.
+    Parameters
+    ----------
+    text : str
+        The input text to be processed by the chatbot model.
+    **kwargs : dict
+        Optional keyword arguments to be passed to the chatbot model.
 
-    Возвращает:
-    answer -- str, ответ на вопрос.
+    Returns
+    -------
+    str
+        The name of the chatbot model.
     """
+
     MODEL_NAME = "cointegrated/rut5-base-multitask"
 
-    tokenizer = T5Tokenizer.from_pretrained('src/model/')
-    model = T5ForConditionalGeneration.from_pretrained('src/model/')
+    tokenizer = T5Tokenizer.from_pretrained("src/model/")
+    model = T5ForConditionalGeneration.from_pretrained("src/model/")
     task_prefix = "Chat: "
     inputs = tokenizer(task_prefix + text, return_tensors="pt")
     with torch.no_grad():
@@ -128,15 +138,43 @@ def chat_t5(text, **kwargs):
 
 
 def chat(text):
+    """
+    A function that takes in a text message as a parameter and returns AI-generated text responses using GPT4All model.
+
+    Parameters
+    ----------
+    text : str
+        A string representing the input text message.
+
+    Returns
+    -------
+    list
+        A list of AI-generated text responses.
+
+    Example
+    -------
+    >>> chat("Hello, how are you?")
+    ["I'm fine, thank you. How about yourself?"]
+    """
+
     gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy", "./src/model/")
     messages = [{"role": "user", "content": text}]
 
-    return gptj.chat_completion(messages) #["choices"] #[0]["content"]
+    return gptj.chat_completion(messages)["choices"][0]["content"]
 
 
 def recomend_als(user_id):
-    """
-    Рекомендация пользователя на основе модели ALS.
+    """Recommends books using the ALS algorithm.
+
+    Parameters
+    ----------
+    user_id : int
+        The ID of the user to find similar books to.
+
+    Returns
+    -------
+    pandas.DataFrame
+        A DataFrame containing information about the similar books.
     """
     with open("./src/model/als.pickle", "rb") as f:
         model = pickle.load(f)
@@ -147,13 +185,28 @@ def recomend_als(user_id):
     intercations, _ = create_weighted_interaction_matrix(intercations)
 
     dataset = intercations[intercations["user_id"].isin(similar_users)].sort_values(
-        by="target", ascending=False,
+        by="target",
+        ascending=False,
     )["item_id"]
     items_data = items_data[items_data["id"].isin(dataset)]
     return items_data
 
 
 def recomend_bm25(item_id):
+    """
+    Recommends books similar to a given book ID using the BM25 algorithm.
+
+    Parameters
+    ----------
+    item_id : int
+        The ID of the book to find similar books to.
+
+    Returns
+    -------
+    pandas.DataFrame
+        A DataFrame containing information about the similar books.
+    """
+
     _, _, items_data = read_data(os.path.join("./src/"))
 
     with open(os.path.join("./src/model/bm25.pickle"), "rb") as f:
