@@ -32,7 +32,7 @@ streamlit run app.py --server.port=8081 --server.address=0.0.0.0
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-Либо с помощью [**Docker**](https://hub.docker.com/repository/docker/redpowerful/mfdp/general) 
+Либо с помощью [**Docker**](https://hub.docker.com/repository/docker/redpowerful/mfdp/general) (временно с багами)
 
 ```
 docker build -t redpowerful/mfdp:latest .
