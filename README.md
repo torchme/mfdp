@@ -109,7 +109,7 @@ ALS (Alternating Least Squares) и BM25 (Best Matching 25) - это два ра�
 
 ## <img src="https://github.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/blob/master/Emojis/Animals/Whale.png?raw=true" height="32"/> Деплоймент
 Конечный этап разработки проекта DontReadMe - его деплоймент. Это важный процесс, который включает в себя множество шагов, начиная от тестирования и сборки приложения, и заканчивая настройкой мониторинга и обновлением. В этой статье мы рассмотрим процесс деплоймента для проекта DontReadMe, описав каждый шаг и детали, которые помогут вам успешно развернуть ваше приложение в производственной среде.
-* [Docker](https://hub.docker.com/repository/docker/redpowerful/mfdp/general)
+* [Docker (временно с багами)](https://hub.docker.com/repository/docker/redpowerful/mfdp/general) 
 * [GitHub](https://github.com/torchme/mfdp)
 * [API](https://torchme.github.io/mfdp/)
 * [WANDB](https://wandb.ai/torchme/MFDP/reports/MFDP-Report--Vmlldzo0MzUxNTcw)
